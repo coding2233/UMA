@@ -190,3 +190,19 @@ Received Import Request.
 Start importing Assets/UMA-Adapter/Demo using Guid(f574f8dff19df9244989d19e5b7f6bf6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46c7ea75728d9b6a8d048c67d65bebde') in 0.001102 seconds 
   Import took 0.003686 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 87.600233 seconds.
+  path: Assets/UMA/Getting Started/UMADynamicCharacterAvatar.prefab
+  artifactKey: Guid(5c80fc4442f8349969abea6c1a0f1faa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UMA/Getting Started/UMADynamicCharacterAvatar.prefab using Guid(5c80fc4442f8349969abea6c1a0f1faa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92b130ff64bb087a27047caf8611e35a') in 0.838544 seconds 
+  Import took 0.841988 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000280 seconds.
+  path: Assets/UMA/Getting Started/UMADynamicCharacterAvatar-LOD.prefab
+  artifactKey: Guid(165a16ac9ccf1a94080956c3b8c82000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UMA/Getting Started/UMADynamicCharacterAvatar-LOD.prefab using Guid(165a16ac9ccf1a94080956c3b8c82000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c50d5eede9f32a5b0184157c885731d9') in 0.014442 seconds 
+  Import took 0.017563 seconds .
+
