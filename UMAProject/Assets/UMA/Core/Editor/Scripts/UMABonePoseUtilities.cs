@@ -89,7 +89,7 @@ namespace UMA
 			{
 				UMAAssetIndexer.Instance.EvilAddAsset(typeof(SlotDataAsset), sda);
 				UMAAssetIndexer.Instance.EvilAddAsset(typeof(DynamicUMADnaAsset), duda);
-				EditorUtility.SetDirty(UMAAssetIndexer.Instance);
+				//EditorUtility.SetDirty(UMAAssetIndexer.Instance);
 			}
 
 			if (createWardrobeRecipe)

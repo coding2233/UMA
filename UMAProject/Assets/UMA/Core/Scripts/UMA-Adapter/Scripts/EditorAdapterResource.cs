@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UMA.CharacterSystem;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,10 +13,15 @@ namespace UMA
     {
         private const string _assetRootPath = "Assets/UMA";
 
+        private Type[] _assetTypes = new Type[] {typeof(RaceData), typeof(SlotDataAsset), typeof(UMATextRecipe),
+            typeof(UMAMaterial), typeof(OverlayDataAsset), typeof(DynamicUMADnaAsset),
+            typeof(RuntimeAnimatorController),typeof(AnimatorOverrideController),
+            typeof(UMAWardrobeRecipe),typeof(UMAWardrobeCollection),typeof(TextAsset),
+            //
+        };
+
         private Dictionary<string, UnityEngine.Object> _allAssets;
         private List<string> _allAssetPath;
-
-        private Type[] _assetTypes = new Type[] {typeof(RaceData), typeof(SlotDataAsset), typeof(UMATextRecipe), typeof(UMAMaterial), typeof(OverlayDataAsset), typeof(DynamicUMADnaAsset)};
         private Dictionary<Type, List<UnityEngine.Object>> _allTypeAssets;
 
         public EditorAdapterResource()
@@ -34,8 +40,11 @@ namespace UMA
                 {
                     string assetPath = AssetDatabase.GUIDToAssetPath(item);
                     var @object = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-                    _allAssets.Add(assetPath, @object);
-                    _allAssetPath.Add(assetPath);
+                    if (!_allAssets.ContainsKey(assetPath))
+                    {
+                        _allAssets.Add(assetPath, @object);
+                        _allAssetPath.Add(assetPath);
+                    }
                     @objects.Add(@object);
                     //Debug.Log($"[Find asset]: {assetPath} ### [type]: {@object.GetType()}");
                 }
@@ -75,7 +84,10 @@ namespace UMA
                             return item as T;
                         }
                     }
-                    
+                    else
+                    {
+                        Debug.LogWarning($"Cannot get the object's INameProvider! name: {name} type: {typeof(T).Name}");
+                    }
                 }
             }
             //    var matchAssetPaths = _allAssetPath.FindAll((assetPath) => {

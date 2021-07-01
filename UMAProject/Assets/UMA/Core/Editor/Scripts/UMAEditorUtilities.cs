@@ -571,7 +571,7 @@ namespace UMA
 			{
 				// Add it to the global libary
 				UMAAssetIndexer.Instance.EvilAddAsset(typeof(CharacterSystem.UMAWardrobeRecipe), asset);
-				EditorUtility.SetDirty(UMAAssetIndexer.Instance);
+				//EditorUtility.SetDirty(UMAAssetIndexer.Instance);
 			}
 			// Inform the asset database a file has changes
 			AssetDatabase.Refresh();

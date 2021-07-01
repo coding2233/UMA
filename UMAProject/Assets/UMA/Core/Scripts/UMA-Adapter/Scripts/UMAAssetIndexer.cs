@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UMA
 {
-    public class UMAAssetIndexer: ScriptableObject
+    public class UMAAssetIndexer
     {
         private static UMAAssetIndexer _instance;
         public static UMAAssetIndexer Instance
@@ -23,7 +23,7 @@ namespace UMA
 #endif
                     }
                 }
-
+                
                 return _instance;
             }
         }
@@ -251,7 +251,7 @@ namespace UMA
 
         public List<T> GetAllAssets<T>(string[] foldersToSearch = null) where T : UnityEngine.Object
         {
-            //Debug.Log($"[UMAAssetIndexer] [GetAllAssets] foldersToSearch:{foldersToSearch == null} type:{typeof(T)}");
+            Debug.Log($"[UMAAssetIndexer] [GetAllAssets] foldersToSearch:{foldersToSearch == null} type:{typeof(T)}");
             return _adapterResource.GetAllAssets<T>();
 
             //var st = StartTimer();
@@ -273,7 +273,7 @@ namespace UMA
 
         public T GetAsset<T>(int nameHash, string[] foldersToSearch = null) where T : UnityEngine.Object
         {
-            Debug.Log($"[UMAAssetIndexer] [GetAsset] name: {name} foldersToSearch:{foldersToSearch==null} type:{typeof(T)}");
+            Debug.Log($"[UMAAssetIndexer] [GetAsset] nameHash: {nameHash} foldersToSearch:{foldersToSearch==null} type:{typeof(T)}");
 
 
             //System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
@@ -351,7 +351,7 @@ namespace UMA
             //    return null;
             //}
 
-            Debug.Log($"[UMAAssetIndexer] [GetAsset] name: {name} type:{typeof(T)}");
+            //Debug.Log($"[UMAAssetIndexer] [GetAsset] name: {name} type:{typeof(T)}");
 
             return _adapterResource.GetAsset<T>(name); 
         }
