@@ -9,16 +9,9 @@ using UnityEngine;
 
 namespace UMA
 {
-    public class EditorAdapterResource : IAdapterResource
+    public class EditorAdapterResource : AdapterResource
     {
         private const string _assetRootPath = "Assets/UMA";
-
-        private Type[] _assetTypes = new Type[] {typeof(RaceData), typeof(SlotDataAsset), typeof(UMATextRecipe),
-            typeof(UMAMaterial), typeof(OverlayDataAsset), typeof(DynamicUMADnaAsset),
-            typeof(RuntimeAnimatorController),typeof(AnimatorOverrideController),
-            typeof(UMAWardrobeRecipe),typeof(UMAWardrobeCollection),typeof(TextAsset),
-            //
-        };
 
         private Dictionary<string, UnityEngine.Object> _allAssets;
         private List<string> _allAssetPath;
@@ -26,10 +19,6 @@ namespace UMA
 
         public EditorAdapterResource()
         {
-            _allAssets = new Dictionary<string, UnityEngine.Object>();
-            _allAssetPath = new List<string>();
-            _allTypeAssets = new Dictionary<Type, List<UnityEngine.Object>>();
-
             foreach (var assetType in _assetTypes)
             {
                 List<UnityEngine.Object> @objects = new List<UnityEngine.Object>();
@@ -51,7 +40,7 @@ namespace UMA
             }
         }
 
-        public List<T> GetAllAssets<T>(string[] foldersToSearch = null) where T : UnityEngine.Object
+        public override List<T> GetAllAssets<T>(string[] foldersToSearch = null)
         {
             List<T> result = new List<T>();
             if (_allTypeAssets.TryGetValue(typeof(T), out List<UnityEngine.Object> resultObjects))
@@ -70,8 +59,13 @@ namespace UMA
             return result;
         }
 
-        public T GetAsset<T>(string name) where T : UnityEngine.Object
+        public override T GetAsset<T>(string name) 
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                Debug.LogWarning($"The resource name cannot be NULL! name: {name} type: {typeof(T).Name}");
+                return null;
+            }
             if (_allTypeAssets.TryGetValue(typeof(T), out List<UnityEngine.Object> resultObjects))
             {
                 foreach (var item in resultObjects)
@@ -86,9 +80,13 @@ namespace UMA
                     }
                     else
                     {
-                        Debug.LogWarning($"Cannot get the object's INameProvider! name: {name} type: {typeof(T).Name}");
+                        if (item.name.Equals(name))
+                        {
+                            return item as T;
+                        }
                     }
                 }
+                //Debug.LogWarning($"Cannot get the object's INameProvider! name: {name} type: {typeof(T).Name}");
             }
             //    var matchAssetPaths = _allAssetPath.FindAll((assetPath) => {
             //    string fileName = Path.GetFileNameWithoutExtension(assetPath).Replace(" ","").ToLower();

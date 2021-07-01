@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.unity.assetbundlebrowser": {
+      "version": "https://hub.fastgit.org/Unity-Technologies/AssetBundles-Browser.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b7c279278d1a343c6957c9f15b45173d3211f01c"
+    },
     "com.unity.collab-proxy": {
       "version": "1.5.7",
       "depth": 0,
@@ -49,7 +56,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.test-framework": {
-      "version": "1.1.24",
+      "version": "1.1.27",
       "depth": 0,
       "source": "registry",
       "dependencies": {

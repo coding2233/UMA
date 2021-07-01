@@ -29,7 +29,7 @@ namespace UMA
         }
 
 
-        private IAdapterResource _adapterResource;
+        private AdapterResource _adapterResource;
 
         #region constants and static strings
         public static string SortOrder = "Name";
@@ -131,6 +131,7 @@ namespace UMA
         /// <returns></returns>
         public AssetItem GetAssetItem<T>(string Name)
         {
+            Debug.Log($"[UMAAssetIndexer] [GetAssetItems] name: {Name}");
             //System.Type ot = typeof(T);
             //System.Type theType = TypeToLookup[ot];
             //Dictionary<string, AssetItem> TypeDic = GetAssetDictionary(theType);
@@ -161,6 +162,8 @@ namespace UMA
         /// <returns></returns>
         public AssetItem GetAssetItemForObject(UnityEngine.Object o)
         {
+            Debug.Log($"[UMAAssetIndexer] [GetAssetItemForObject] object name: {o.name} ");
+
             //System.Type ot = o.GetType();
             //System.Type theType = TypeToLookup[ot];
             //Dictionary<string, AssetItem> TypeDic = GetAssetDictionary(theType);
@@ -177,6 +180,8 @@ namespace UMA
 
         public List<AssetItem> GetAssetItems(string recipe, bool LookForLODs = false)
         {
+            Debug.Log($"[UMAAssetIndexer] [GetAssetItems] recipe: {recipe} LookForLODs: {LookForLODs}");
+
             AssetItem ai = GetAssetItem<UMAWardrobeRecipe>(recipe);
             if (ai != null)
             {
@@ -187,6 +192,7 @@ namespace UMA
 
         public List<AssetItem> GetAssetItems(UMAPackedRecipeBase recipe, bool LookForLODs = false)
         {
+            Debug.Log($"[UMAAssetIndexer] [GetAssetItems] recipe: {recipe} LookForLODs: {LookForLODs}");
             List<AssetItem> returnval = new List<AssetItem>();
             //if (recipe is UMAWardrobeCollection)
             //{
