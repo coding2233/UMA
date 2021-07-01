@@ -9,7 +9,7 @@ namespace UMA
 	/// </summary>
 	[PreferBinarySerialization]
 	[System.Serializable]
-	public partial class OverlayDataAsset : ScriptableObject, ISerializationCallbackReceiver
+	public partial class OverlayDataAsset : ScriptableObject, ISerializationCallbackReceiver, INameProvider
 	{
 		[Tooltip("The name of this overlay.")]
 		public string overlayName;
@@ -177,5 +177,16 @@ namespace UMA
 #endif
 			}
 		}
-	}
+
+        public string GetAssetName()
+        {
+			return overlayName;
+        }
+
+        public int GetNameHash()
+        {
+			return nameHash;
+
+		}
+    }
 }

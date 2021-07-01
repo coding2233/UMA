@@ -311,8 +311,10 @@ namespace UMA
             if (!showIndexedTypes) return;
             if (UMAAssetIndexer.Instance == null) return;
 
-            AssetItem ai = UMAAssetIndexer.Instance.FromGuid(guid);
-            if (ai != null)
+			//AssetItem ai = UMAAssetIndexer.Instance.FromGuid(guid);
+			AssetItem ai = null;
+
+			if (ai != null)
             {
                 if (FriendlyNames.ContainsKey(ai._Type))
                 {
