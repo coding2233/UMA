@@ -537,7 +537,7 @@ namespace UMA
             //        ai.FreeReference();
             //    }
             //}
-            ForceSave();
+            //ForceSave();
         }
 
         /// <summary>

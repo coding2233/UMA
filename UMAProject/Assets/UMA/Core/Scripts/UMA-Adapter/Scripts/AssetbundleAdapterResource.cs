@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -28,25 +30,55 @@ namespace UMA
         [MenuItem("UMA-Adapter/Build-AssetBundle")]
         static void main()
         {
-            //foreach (var assetType in _assetTypes)
-            //{
-            //    List<UnityEngine.Object> @objects = new List<UnityEngine.Object>();
-            //    _allTypeAssets.Add(assetType, @objects);
+            var _assetTypes = AdapterResource.AssetTypes;
+            List<AssetBundleBuild> abbs = new List<AssetBundleBuild>();
 
-            //    var findAssets = AssetDatabase.FindAssets($"t:{assetType.Name}", new string[] { _assetRootPath });
-            //    foreach (var item in findAssets)
-            //    {
-            //        string assetPath = AssetDatabase.GUIDToAssetPath(item);
-            //        var @object = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-            //        if (!_allAssets.ContainsKey(assetPath))
-            //        {
-            //            _allAssets.Add(assetPath, @object);
-            //            _allAssetPath.Add(assetPath);
-            //        }
-            //        @objects.Add(@object);
-            //        //Debug.Log($"[Find asset]: {assetPath} ### [type]: {@object.GetType()}");
-            //    }
-            //}
+            Dictionary<string, Type> allAssetPaths = new Dictionary<string, Type>();
+
+            foreach (var assetType in _assetTypes)
+            {
+                if (assetType == typeof(TextAsset))
+                    continue;
+
+                var findAssets = AssetDatabase.FindAssets($"t:{assetType.Name}", new string[] { "Assets/UMA" });
+                if (findAssets.Length > 0)
+                {
+                    HashSet<string> assetPaths = new HashSet<string>();
+                    foreach (var item in findAssets)
+                    {
+                        string assetPath = AssetDatabase.GUIDToAssetPath(item);
+                        
+                        if (allAssetPaths.ContainsKey(assetPath))
+                        {
+                            Debug.LogWarning($"Repeat resources£º{assetPath} type: {assetType.Name} <-> oldType: {allAssetPaths[assetPath].Name} ");
+                        }
+                        else
+                        {
+                            assetPaths.Add(assetPath);
+                            allAssetPaths.Add(assetPath,assetType);
+                        }
+                    }
+
+                    if (assetPaths.Count > 0)
+                    {
+                        AssetBundleBuild abb = new AssetBundleBuild();
+                        abb.assetBundleName = $"109{assetType.Name.ToLower()}";
+                        abb.assetNames = new string[assetPaths.Count];
+                        assetPaths.CopyTo(abb.assetNames);
+                        abbs.Add(abb);
+                    }
+                }
+            }
+
+            string buildPath = "build/asset/";
+            if (!Directory.Exists(buildPath))
+            {
+                Directory.CreateDirectory(buildPath);
+            }
+            BuildAssetBundleOptions options = BuildAssetBundleOptions.None;
+            options |= BuildAssetBundleOptions.UncompressedAssetBundle;
+            BuildPipeline.BuildAssetBundles(buildPath, abbs.ToArray(), options,BuildTarget.Android);
+
             //UnityEditor.BuildPipeline
         }
     }

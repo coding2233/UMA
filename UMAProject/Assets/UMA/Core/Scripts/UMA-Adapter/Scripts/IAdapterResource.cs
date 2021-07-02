@@ -12,10 +12,10 @@ namespace UMA
         protected List<string> _allAssetPath=new List<string>();
         protected Dictionary<Type, List<UnityEngine.Object>> _allTypeAssets=new Dictionary<Type, List<UnityEngine.Object>>();
 
-        protected Type[] _assetTypes { get; } = new Type[] {typeof(RaceData), typeof(SlotDataAsset), typeof(UMATextRecipe),
+        public static Type[] AssetTypes { get; } = new Type[] {typeof(RaceData), typeof(SlotDataAsset), 
             typeof(UMAMaterial), typeof(OverlayDataAsset), typeof(DynamicUMADnaAsset),
             typeof(RuntimeAnimatorController),typeof(AnimatorOverrideController),
-            typeof(UMAWardrobeRecipe),typeof(UMAWardrobeCollection),typeof(TextAsset),
+            typeof(UMAWardrobeRecipe),typeof(UMAWardrobeCollection),typeof(UMATextRecipe),typeof(TextAsset),
             //
         };
 

@@ -13,13 +13,13 @@ namespace UMA
     {
         private const string _assetRootPath = "Assets/UMA";
 
-        private Dictionary<string, UnityEngine.Object> _allAssets;
-        private List<string> _allAssetPath;
-        private Dictionary<Type, List<UnityEngine.Object>> _allTypeAssets;
+        //private Dictionary<string, UnityEngine.Object> _allAssets;
+        //private List<string> _allAssetPath;
+        //private Dictionary<Type, List<UnityEngine.Object>> _allTypeAssets;
 
         public EditorAdapterResource()
         {
-            foreach (var assetType in _assetTypes)
+            foreach (var assetType in AssetTypes)
             {
                 List<UnityEngine.Object> @objects = new List<UnityEngine.Object>();
                 _allTypeAssets.Add(assetType, @objects);
