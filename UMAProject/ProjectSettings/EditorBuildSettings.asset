@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/UMA/Examples/DynamicCharacterSystem Examples/UMA DCS Demo - Simple
       Setup.unity
     guid: 43ce2d3e5bdfc924b84fc85a02c01ca0
+  - enabled: 1
+    path: Assets/UMA-Demo/Demo.unity
+    guid: ee916a36a59bc67468e6152960291648
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: ed6b5b26391af004b8212d64b1b84256,
       type: 2}

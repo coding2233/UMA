@@ -11,15 +11,53 @@ namespace UMA
 {
     public class AssetBundleAdapterResource : AdapterResource
     {
-        public override List<T> GetAllAssets<T>(string[] foldersToSearch = null)
-        {
-            return null;
+        public AssetBundleAdapterResource()
+        { 
+            AssetBundle.UnloadAllAssetBundles(true);
+            var manifestAB = AssetBundle.LoadFromFile(Path.Combine(Application.persistentDataPath,"asset"));
+            AssetBundleManifest manifest = manifestAB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+
+            foreach (var assetType in AssetTypes)
+            {
+                if (assetType == typeof(TextAsset))
+                    continue;
+                string abPath = Path.Combine(Application.persistentDataPath, $"109{assetType.Name.ToLower()}");
+
+                if (!File.Exists(abPath))
+                {
+                    continue;
+                }
+                 var ab = AssetBundle.LoadFromFile(abPath);
+                
+                List<UnityEngine.Object> @objects = new List<UnityEngine.Object>();
+                _allTypeAssets.Add(assetType, @objects);
+
+                var findAssets = ab.GetAllAssetNames();
+                foreach (var item in findAssets)
+                {
+                    var @object = ab.LoadAsset<UnityEngine.Object>(item);
+                    if (!_allAssets.ContainsKey(item))
+                    {
+                        _allAssets.Add(item, @object);
+                        _allAssetPath.Add(item);
+                    }
+                    @objects.Add(@object);
+                    //Debug.Log($"[Find asset]: {assetPath} ### [type]: {@object.GetType()}");
+                }
+            }
+
+
         }
 
-        public override T GetAsset<T>(string name)
-        {
-            return null;
-        }
+        //public override List<T> GetAllAssets<T>(string[] foldersToSearch = null)
+        //{
+        //    return null;
+        //}
+
+        //public override T GetAsset<T>(string name)
+        //{
+        //    return null;
+        //}
     }
 
 

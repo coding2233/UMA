@@ -40,80 +40,58 @@ namespace UMA
             }
         }
 
-        public override List<T> GetAllAssets<T>(string[] foldersToSearch = null)
-        {
-            List<T> result = new List<T>();
-            if (_allTypeAssets.TryGetValue(typeof(T), out List<UnityEngine.Object> resultObjects))
-            {
-                foreach (var item in resultObjects)
-                {
-                    result.Add(item as T);
-                }
-            }
+        //public override List<T> GetAllAssets<T>(string[] foldersToSearch = null)
+        //{
+        //    List<T> result = new List<T>();
+        //    if (_allTypeAssets.TryGetValue(typeof(T), out List<UnityEngine.Object> resultObjects))
+        //    {
+        //        foreach (var item in resultObjects)
+        //        {
+        //            result.Add(item as T);
+        //        }
+        //    }
 
-            if (result.Count==0)
-            {
-                Debug.Log($"[EditorAdapterResource] [GetAllAssets] Object of corresponding type was not found! type: {typeof(T)}");
-            }
+        //    if (result.Count==0)
+        //    {
+        //        Debug.Log($"[EditorAdapterResource] [GetAllAssets] Object of corresponding type was not found! type: {typeof(T)}");
+        //    }
             
-            return result;
-        }
+        //    return result;
+        //}
 
-        public override T GetAsset<T>(string name) 
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                Debug.LogWarning($"The resource name cannot be NULL! name: {name} type: {typeof(T).Name}");
-                return null;
-            }
-            if (_allTypeAssets.TryGetValue(typeof(T), out List<UnityEngine.Object> resultObjects))
-            {
-                foreach (var item in resultObjects)
-                {
-                    INameProvider nameProvider = item as INameProvider;
-                    if (nameProvider != null)
-                    {
-                        if (nameProvider.GetAssetName().Equals(name))
-                        {
-                            return item as T;
-                        }
-                    }
-                    else
-                    {
-                        if (item.name.Equals(name))
-                        {
-                            return item as T;
-                        }
-                    }
-                }
-                //Debug.LogWarning($"Cannot get the object's INameProvider! name: {name} type: {typeof(T).Name}");
-            }
-            //    var matchAssetPaths = _allAssetPath.FindAll((assetPath) => {
-            //    string fileName = Path.GetFileNameWithoutExtension(assetPath).Replace(" ","").ToLower();
-            //    //Debug.Log($"[EditorAdapterResource] {fileName}");
-            //    if (fileName.Equals(name.ToLower()))
-            //    {
-            //        return true;
-            //    }
-            //    return false;
-            //});
+        //public override T GetAsset<T>(string name) 
+        //{
+        //    if (string.IsNullOrEmpty(name))
+        //    {
+        //        Debug.LogWarning($"The resource name cannot be NULL! name: {name} type: {typeof(T).Name}");
+        //        return null;
+        //    }
+        //    if (_allTypeAssets.TryGetValue(typeof(T), out List<UnityEngine.Object> resultObjects))
+        //    {
+        //        foreach (var item in resultObjects)
+        //        {
+        //            INameProvider nameProvider = item as INameProvider;
+        //            if (nameProvider != null)
+        //            {
+        //                if (nameProvider.GetAssetName().Equals(name))
+        //                {
+        //                    return item as T;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                if (item.name.Equals(name))
+        //                {
+        //                    return item as T;
+        //                }
+        //            }
+        //        }
+        //    }
+         
+        //    Debug.LogWarning($"[EditorAdapterResource] The corresponding Object could not be found! name: {name} type: {typeof(T)}");
 
-            //if (matchAssetPaths != null)
-            //{
-            //    foreach (var item in matchAssetPaths)
-            //    {
-            //        var @object = AssetDatabase.LoadAssetAtPath<T>(item);
-            //        if (@object != null)
-            //        {
-            //            return @object;
-            //        }
-            //    }
-            //}
-
-            Debug.LogWarning($"[EditorAdapterResource] The corresponding Object could not be found! name: {name} type: {typeof(T)}");
-
-            return null;
-        }
+        //    return null;
+        //}
     
     }
 }

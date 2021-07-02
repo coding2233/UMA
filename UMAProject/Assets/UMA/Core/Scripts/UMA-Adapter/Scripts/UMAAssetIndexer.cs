@@ -16,14 +16,19 @@ namespace UMA
                 if (_instance == null)
                 {
                     _instance = new UMAAssetIndexer();
-                    if (_instance._adapterResource == null)
-                    {
-#if UNITY_EDITOR
-                        _instance._adapterResource = new EditorAdapterResource();
-#endif
-                    }
+
+//                    if (_instance._adapterResource == null)
+//                    {
+//#if UNITY_EDITOR
+//                        _instance._adapterResource = new EditorAdapterResource();
+//#else
+//                        _instance._adapterResource = new AssetBundleAdapterResource();
+//#endif
+//                    }
+                    _instance._adapterResource = new AssetBundleAdapterResource();
+
                 }
-                
+
                 return _instance;
             }
         }
