@@ -115,7 +115,7 @@ namespace UMA
             }
             BuildAssetBundleOptions options = BuildAssetBundleOptions.None;
             options |= BuildAssetBundleOptions.UncompressedAssetBundle;
-            BuildPipeline.BuildAssetBundles(buildPath, abbs.ToArray(), options,BuildTarget.Android);
+            BuildPipeline.BuildAssetBundles(buildPath, abbs.ToArray(), options,EditorUserBuildSettings.activeBuildTarget);
 
             //UnityEditor.BuildPipeline
         }

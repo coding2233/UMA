@@ -10,6 +10,7 @@ namespace UMA
     {
         protected Dictionary<string, UnityEngine.Object> _allAssets=new Dictionary<string, UnityEngine.Object>();
         protected List<string> _allAssetPath=new List<string>();
+        //protected Dictionary<int, string> _nameHash = new Dictionary<int, string>();
         protected Dictionary<Type, List<UnityEngine.Object>> _allTypeAssets=new Dictionary<Type, List<UnityEngine.Object>>();
 
         public static Type[] AssetTypes { get; } = new Type[] {typeof(RaceData), typeof(SlotDataAsset), 
@@ -68,6 +69,35 @@ namespace UMA
             }
 
             Debug.LogWarning($"[EditorAdapterResource] The corresponding Object could not be found! name: {name} type: {typeof(T)}");
+
+            return null;
+        }
+
+        public virtual T GetAsset<T>(int nameHash) where T : UnityEngine.Object
+        {
+            if (_allTypeAssets.TryGetValue(typeof(T), out List<UnityEngine.Object> resultObjects))
+            {
+                foreach (var item in resultObjects)
+                {
+                    INameProvider nameProvider = item as INameProvider;
+                    if (nameProvider != null)
+                    {
+                        if (nameProvider.GetAssetName().GetHashCode().Equals(nameHash))
+                        {
+                            return item as T;
+                        }
+                    }
+                    else
+                    {
+                        if (item.name.GetHashCode().Equals(nameHash))
+                        {
+                            return item as T;
+                        }
+                    }
+                }
+            }
+
+            Debug.LogWarning($"[EditorAdapterResource] The corresponding Object could not be found! name hashcode: {nameHash} type: {typeof(T)}");
 
             return null;
         }

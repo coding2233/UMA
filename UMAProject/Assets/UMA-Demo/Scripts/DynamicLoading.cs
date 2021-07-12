@@ -63,6 +63,10 @@ public class DynamicLoading : MonoBehaviour
             yield return new WaitForEndOfFrame();
             _log = $"生成物体";
             var t =GameObject.Instantiate(_target);
+            var dca = t.GetComponent<DynamicCharacterAvatar>();
+            dca.activeRace.data = UMAAssetIndexer.Instance.GetAsset<RaceData>("HumanMale");
+            dca.BuildCharacter();
+            yield return new WaitForEndOfFrame();
             t.SetActive(true);
         }
     }
@@ -78,12 +82,23 @@ public class DynamicLoading : MonoBehaviour
         GUI.Button(new Rect(Screen.width*0.5f,Screen.height*0.5f,400,300),_log);
     }
 #else
-    private void Awake()
+    private IEnumerator Start()
     {
         var i = UMAAssetIndexer.Instance;
+        yield return new WaitForEndOfFrame();
+        UMAContextBase.Instance = GameObject.FindObjectOfType<UMAGlobalContext>();
+        yield return new WaitForEndOfFrame();
+
+        var hm = UMAAssetIndexer.Instance.GetAsset<RaceData>("HumanMale");
+
         var t = GameObject.Instantiate(_target);
-        t.GetComponent<DynamicCharacterAvatar>().activeRace.data = UMAAssetIndexer.Instance.GetAsset<RaceData>("HumanMale");
+        var dca = t.GetComponent<DynamicCharacterAvatar>();
+        dca.activeRace.data = UMAAssetIndexer.Instance.GetAsset<RaceData>("HumanMale");
+        dca.BuildCharacter();
         t.SetActive(true);
+
+
+
     }
 #endif
 
