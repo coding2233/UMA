@@ -18,22 +18,22 @@ namespace UMA
 
         public void LoadBundles()
         {
-            foreach (AssetBundle ab in Bundles)
-            {
-                if (!loadedBundles.Contains(ab))
-                {
-                    UMAAssetIndexer.Instance.AddFromAssetBundle(ab);
-                    loadedBundles.Add(ab);
-                }
-            }
+            //foreach (AssetBundle ab in Bundles)
+            //{
+            //    if (!loadedBundles.Contains(ab))
+            //    {
+            //         UMAContextAdpterIndexer.AdapterResource.AddFromAssetBundle(ab);
+            //        loadedBundles.Add(ab);
+            //    }
+            //}
         }
 
         public void UnloadBundles()
         {
-           foreach(AssetBundle ab in loadedBundles)
-            {
-                UMAAssetIndexer.Instance.UnloadBundle(ab);
-            }
+           //foreach(AssetBundle ab in loadedBundles)
+           // {
+           //      UMAContextAdpterIndexer.AdapterResource.UnloadBundle(ab);
+           // }
         }
     }
 }

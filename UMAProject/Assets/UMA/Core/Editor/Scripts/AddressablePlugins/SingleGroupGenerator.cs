@@ -56,7 +56,7 @@ namespace UMA
 
                 RecipeExtraLabels = new Dictionary<string, List<string>>();
                 
-                    var WardrobeCollections = UMAAssetIndexer.Instance.GetAllAssets<UMAWardrobeCollection>();
+                    var WardrobeCollections =  UMAContextAdpterIndexer.AdapterResource.GetAllAssets<UMAWardrobeCollection>();
                     foreach (var wc in WardrobeCollections)
                     {
                         if (wc == null) continue;
@@ -100,7 +100,7 @@ namespace UMA
                     }
                     if (IncludeRecipes)
                     {
-                        AssetItem RecipeItem = UMAAssetIndexer.Instance.GetRecipeItem(uwr);
+                        AssetItem RecipeItem =  UMAContextAdpterIndexer.AdapterResource.GetRecipeItem(uwr);
                         if (AddressableItems.ContainsKey(RecipeItem) == false)
                         {
                             AddressableItems.Add(RecipeItem, new List<string>());
@@ -247,14 +247,14 @@ namespace UMA
             finally
             {
                 EditorUtility.ClearProgressBar();
-                UMAAssetIndexer.Instance.ForceSave();
+                 UMAContextAdpterIndexer.AdapterResource.ForceSave();
             }
         }
 
         public bool Prepare()
         {
 
-            Index = UMAAssetIndexer.Instance;
+            Index =  UMAContextAdpterIndexer.AdapterResource;
             UMAAddressablesSupport.Instance.CleanupAddressables(false, true);
             foreach (Type t in Index.GetTypes())
             {
@@ -285,7 +285,7 @@ namespace UMA
 
         private void AddAssetItems(Type t, string DefaultLabel)
         {
-            List<AssetItem> Items = UMAAssetIndexer.Instance.GetAssetItems(t);
+            List<AssetItem> Items =  UMAContextAdpterIndexer.AdapterResource.GetAssetItems(t);
             foreach (AssetItem item in Items)
             {
                 AddressableItems.Add(item, new List<string>());

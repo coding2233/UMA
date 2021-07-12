@@ -411,7 +411,7 @@ namespace UMA
 			{
 				if (asset.material == null)
                 {
-					asset.material = UMAAssetIndexer.Instance.GetAsset<UMAMaterial>(asset.materialName);
+					asset.material =  UMAContextAdpterIndexer.AdapterResource.GetAsset<UMAMaterial>(asset.materialName);
                 }
 
 				if (material == null)

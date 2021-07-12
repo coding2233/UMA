@@ -209,7 +209,7 @@ namespace UMA
 				return true;
 			else
 			{
-				if (UMAAssetIndexer.Instance.GetAssetItem<SlotDataAsset>(name) != null)
+				if ( UMAContextAdpterIndexer.AdapterResource.GetAssetItem<SlotDataAsset>(name) != null)
 					return true;
 			}
 
@@ -226,7 +226,7 @@ namespace UMA
 				return true;
 			else
 			{
-				if (UMAAssetIndexer.Instance.GetAsset<SlotDataAsset>(nameHash) != null)
+				if ( UMAContextAdpterIndexer.AdapterResource.GetAsset<SlotDataAsset>(nameHash) != null)
 					return true;
 			}
 
@@ -319,23 +319,23 @@ namespace UMA
 		// Get all DNA
 		public override List<DynamicUMADnaAsset> GetAllDNA()
 		{
-			return UMAAssetIndexer.Instance.GetAllAssets<DynamicUMADnaAsset>();
+			return  UMAContextAdpterIndexer.AdapterResource.GetAllAssets<DynamicUMADnaAsset>();
 		}
 
 		// Get a DNA Asset By Name
 		public override DynamicUMADnaAsset GetDNA(string Name)
 		{
-			return UMAAssetIndexer.Instance.GetAsset<DynamicUMADnaAsset>(Name);
+			return  UMAContextAdpterIndexer.AdapterResource.GetAsset<DynamicUMADnaAsset>(Name);
 		}
 
 		public override RuntimeAnimatorController GetAnimatorController(string Name)
 		{
-			return UMAAssetIndexer.Instance.GetAsset<RuntimeAnimatorController>(Name);
+			return  UMAContextAdpterIndexer.AdapterResource.GetAsset<RuntimeAnimatorController>(Name);
 		}
 
 		public override List<RuntimeAnimatorController> GetAllAnimatorControllers()
 		{
-			return UMAAssetIndexer.Instance.GetAllAssets<RuntimeAnimatorController>();
+			return  UMAContextAdpterIndexer.AdapterResource.GetAllAssets<RuntimeAnimatorController>();
 		}
 
 		public override void AddRecipe(UMATextRecipe recipe)

@@ -216,7 +216,7 @@ namespace UMA.Editors
 					string AssetPath = AssetDatabase.GetAssetPath(sd.GetInstanceID());
 					if (addToGlobalLibrary)
 					{
-						UMAAssetIndexer.Instance.EvilAddAsset(typeof(SlotDataAsset), sd);
+						 //UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(typeof(SlotDataAsset), sd);
 					}
 					OverlayDataAsset od = null;
 					if (createOverlay)
@@ -335,10 +335,10 @@ namespace UMA.Editors
 			asset.material = sd.material;
 			AssetDatabase.CreateAsset(asset, path);
 			AssetDatabase.SaveAssets();
-			if (addToGlobalLibrary)
-			{
-				UMAAssetIndexer.Instance.EvilAddAsset(typeof(OverlayDataAsset), asset);
-			}
+			//if (addToGlobalLibrary)
+			//{
+			//	 UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(typeof(OverlayDataAsset), asset);
+			//}
 			return asset;
 		}
 

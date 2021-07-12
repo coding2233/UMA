@@ -857,7 +857,7 @@ namespace UMA.Editors
 					return true;
 			}
 
-			AssetItem ai = UMAAssetIndexer.Instance.GetAssetItem<RaceData>(_raceData.raceName);
+			AssetItem ai =  UMAContextAdpterIndexer.AdapterResource.GetAssetItem<RaceData>(_raceData.raceName);
 			if (ai != null)
 			{
 				return true;
@@ -930,12 +930,12 @@ namespace UMA.Editors
 				GUILayout.BeginHorizontal();
 				if (GUILayout.Button("Add to Scene Only"))
 				{
-					UMAContextBase.Instance.AddRace(_recipe.raceData);
+					//UMAContextBase.Instance.AddRace(_recipe.raceData);
 				}
 				if (GUILayout.Button("Add to Global Index (Recommended)"))
 				{
-					UMAAssetIndexer.Instance.EvilAddAsset(typeof(RaceData), _recipe.raceData);
-					UMAAssetIndexer.Instance.ForceSave();
+					 //UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(typeof(RaceData), _recipe.raceData);
+					 //UMAContextAdpterIndexer.AdapterResource.ForceSave();
 				}
 				GUILayout.EndHorizontal();
 			}
@@ -1246,7 +1246,7 @@ namespace UMA.Editors
 				}
 			}
 
-			AssetItem ai = UMAAssetIndexer.Instance.GetAssetItem<SlotDataAsset>(_slotData.asset.slotName);
+			AssetItem ai =  UMAContextAdpterIndexer.AdapterResource.GetAssetItem<SlotDataAsset>(_slotData.asset.slotName);
 			if (ai != null)
 			{
 				return true;
@@ -1289,12 +1289,12 @@ namespace UMA.Editors
 				GUILayout.BeginHorizontal();
 				if (GUILayout.Button("Add to Scene Only"))
 				{
-					UMAContextBase.Instance.AddSlotAsset(_slotData.asset);
+					//UMAContextBase.Instance.AddSlotAsset(_slotData.asset);
 				}
 				if (GUILayout.Button("Add to Global Index (Recommended)"))
 				{
-					UMAAssetIndexer.Instance.EvilAddAsset(typeof(SlotDataAsset), _slotData.asset);
-					UMAAssetIndexer.Instance.ForceSave();
+					 //UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(typeof(SlotDataAsset), _slotData.asset);
+					 //UMAContextAdpterIndexer.AdapterResource.ForceSave();
 				}
 				GUILayout.EndHorizontal();
 			}
@@ -1567,7 +1567,7 @@ namespace UMA.Editors
 				}
 			}
 
-			AssetItem ai = UMAAssetIndexer.Instance.GetAssetItem<OverlayDataAsset>(_overlayData.asset.overlayName);
+			AssetItem ai =  UMAContextAdpterIndexer.AdapterResource.GetAssetItem<OverlayDataAsset>(_overlayData.asset.overlayName);
 			if (ai != null)
 			{
 				return true;
@@ -1611,13 +1611,13 @@ namespace UMA.Editors
 				GUILayout.BeginHorizontal();
 				if (GUILayout.Button("Add to Scene Only"))
 				{
-					UMAContextBase.Instance.AddOverlayAsset(_overlayData.asset);
+					//UMAContextBase.Instance.AddOverlayAsset(_overlayData.asset);
 
 				}
 				if (GUILayout.Button("Add to Global Index"))
 				{
-					UMAAssetIndexer.Instance.EvilAddAsset(typeof(OverlayDataAsset), _overlayData.asset);
-					UMAAssetIndexer.Instance.ForceSave();
+					 //UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(typeof(OverlayDataAsset), _overlayData.asset);
+					 //UMAContextAdpterIndexer.AdapterResource.ForceSave();
 				}
 				GUILayout.EndHorizontal();
 			}

@@ -19,7 +19,7 @@ namespace UMA.Editors
 			List<string> Races = new List<string>();
 			currentTarget.raceDatas = new List<RaceData>();
 
-			currentTarget.raceDatas = UMAAssetIndexer.Instance.GetAllAssets<RaceData>();
+			currentTarget.raceDatas =  UMAContextAdpterIndexer.AdapterResource.GetAllAssets<RaceData>();
 			foreach(RaceData race in currentTarget.raceDatas)
 			{
 				if (race != null)

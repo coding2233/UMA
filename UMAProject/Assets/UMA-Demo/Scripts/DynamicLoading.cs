@@ -58,13 +58,13 @@ public class DynamicLoading : MonoBehaviour
             }
             _log = $"资源全部下载完成";
             yield return new WaitForEndOfFrame();
-            var i = UMA.UMAAssetIndexer.Instance;
+            var i = UMA. UMAContextAdpterIndexer.AdapterResource;
              _log = $"本地加载Assetbundle资源";
             yield return new WaitForEndOfFrame();
             _log = $"生成物体";
             var t =GameObject.Instantiate(_target);
             var dca = t.GetComponent<DynamicCharacterAvatar>();
-            dca.activeRace.data = UMAAssetIndexer.Instance.GetAsset<RaceData>("HumanMale");
+            dca.activeRace.data =  UMAContextAdpterIndexer.AdapterResource.GetAsset<RaceData>("HumanMale");
             dca.BuildCharacter();
             yield return new WaitForEndOfFrame();
             t.SetActive(true);
@@ -82,24 +82,21 @@ public class DynamicLoading : MonoBehaviour
         GUI.Button(new Rect(Screen.width*0.5f,Screen.height*0.5f,400,300),_log);
     }
 #else
-    private IEnumerator Start()
-    {
-        var i = UMAAssetIndexer.Instance;
-        yield return new WaitForEndOfFrame();
-        UMAContextBase.Instance = GameObject.FindObjectOfType<UMAGlobalContext>();
-        yield return new WaitForEndOfFrame();
+    //private IEnumerator Start()
+    //{
+    //    var i = UMAContextAdpterIndexer.AdapterResource;
+    //    yield return new WaitForEndOfFrame();
+    //    UMAContextBase.Instance = GameObject.FindObjectOfType<UMAGlobalContext>();
+    //    yield return new WaitForEndOfFrame();
 
-        var hm = UMAAssetIndexer.Instance.GetAsset<RaceData>("HumanMale");
+    //    var hm = UMAContextAdpterIndexer.AdapterResource.GetAsset<RaceData>("HumanMale");
 
-        var t = GameObject.Instantiate(_target);
-        var dca = t.GetComponent<DynamicCharacterAvatar>();
-        dca.activeRace.data = UMAAssetIndexer.Instance.GetAsset<RaceData>("HumanMale");
-        dca.BuildCharacter();
-        t.SetActive(true);
-
-
-
-    }
+    //    var t = GameObject.Instantiate(_target);
+    //    var dca = t.GetComponent<DynamicCharacterAvatar>();
+    //    dca.activeRace.data = UMAContextAdpterIndexer.AdapterResource.GetAsset<RaceData>("HumanMale");
+    //    dca.BuildCharacter();
+    //    t.SetActive(true);
+    //}
 #endif
 
 }

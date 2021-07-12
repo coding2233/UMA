@@ -249,11 +249,11 @@
 //				{
 
 //					string QualifiedName = item.data.type.AssemblyQualifiedName;
-//					if (UMAAssetIndexer.Instance.IsAdditionalIndexedType(QualifiedName))
+//					if ( UMAContextAdpterIndexer.AdapterResource.IsAdditionalIndexedType(QualifiedName))
 //					{
 //						if (GUI.Button(cellRect, "Remove this Type", EditorStyles.toolbarButton))
 //						{
-//							UMAAssetIndexer.Instance.RemoveType(item.data.type);
+//							 UMAContextAdpterIndexer.AdapterResource.RemoveType(item.data.type);
 //							List<AssetTreeElement> RemoveMe = new List<AssetTreeElement>();
 //							RemoveMe.Add(item.data);
 //							this.treeModel.RemoveElements(RemoveMe);
@@ -317,7 +317,7 @@
 //					if (clicked != ai.IsAlwaysLoaded)
 //					{
 //						ai.IsAlwaysLoaded = clicked;
-//						UMAAssetIndexer.Instance.ForceSave();
+//						 UMAContextAdpterIndexer.AdapterResource.ForceSave();
 //					}
 //				}
 //				break;
@@ -454,7 +454,7 @@
 //						// remove from tree.
 
 //						List<AssetTreeElement> RemoveMe = new List<AssetTreeElement>();
-//						UMAAssetIndexer.Instance.RemoveAsset(ai._Type, ai._Name);
+//						 UMAContextAdpterIndexer.AdapterResource.RemoveAsset(ai._Type, ai._Name);
 //						RemoveMe.Add(item.data);
 //						this.treeModel.RemoveElements(RemoveMe);
 //						owningWindow.RecountTypes();

@@ -208,7 +208,7 @@ namespace UMA
 			if (isEmpty)  return;
 			if (asset.material == null)
 			{
-				asset.material = UMAAssetIndexer.Instance.GetAsset<UMAMaterial>(asset.materialName);
+				asset.material =  UMAContextAdpterIndexer.AdapterResource.GetAsset<UMAMaterial>(asset.materialName);
 				if (asset.material == null)
 				{
 					this.colorData = new OverlayColorData(3); // Don't know. Just create it for standard PBR material size. 

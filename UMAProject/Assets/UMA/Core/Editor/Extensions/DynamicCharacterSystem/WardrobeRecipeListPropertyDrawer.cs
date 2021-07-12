@@ -268,8 +268,8 @@ namespace UMA.CharacterSystem.Editors
 						if (GUI.Button(warningRect, warningGUIContent, warningStyle))
 						{
 							//the _recipe value is no longer serialized so we need to get it from AssetDatabase
-							if (foundRecipe != null)
-								UMAAssetIndexer.Instance.EvilAddAsset(foundRecipe.GetType(), foundRecipe);
+							//if (foundRecipe != null)
+							//	 UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(foundRecipe.GetType(), foundRecipe);
 						}
 					}
                     if (GUI.Button(valRBut, "X"))

@@ -13,6 +13,24 @@ namespace UMA
         //protected Dictionary<int, string> _nameHash = new Dictionary<int, string>();
         protected Dictionary<Type, List<UnityEngine.Object>> _allTypeAssets=new Dictionary<Type, List<UnityEngine.Object>>();
 
+        protected Dictionary<System.Type, System.Type> TypeToLookup = new Dictionary<System.Type, System.Type>()
+        {
+        { (typeof(SlotDataAsset)),(typeof(SlotDataAsset)) },
+        { (typeof(OverlayDataAsset)),(typeof(OverlayDataAsset)) },
+        { (typeof(RaceData)),(typeof(RaceData)) },
+        { (typeof(UMATextRecipe)),(typeof(UMATextRecipe)) },
+        { (typeof(UMAWardrobeRecipe)),(typeof(UMAWardrobeRecipe)) },
+        { (typeof(UMAWardrobeCollection)),(typeof(UMAWardrobeCollection)) },
+        { (typeof(RuntimeAnimatorController)),(typeof(RuntimeAnimatorController)) },
+        { (typeof(AnimatorOverrideController)),(typeof(RuntimeAnimatorController)) },
+//#if UNITY_EDITOR
+//        { (typeof(AnimatorController)),(typeof(RuntimeAnimatorController)) },
+//#endif
+        {  typeof(TextAsset), typeof(TextAsset) },
+        { (typeof(DynamicUMADnaAsset)), (typeof(DynamicUMADnaAsset)) },
+        {(typeof(UMAMaterial)), (typeof(UMAMaterial)) }
+        };
+
         public static Type[] AssetTypes { get; } = new Type[] {typeof(RaceData), typeof(SlotDataAsset), 
             typeof(UMAMaterial), typeof(OverlayDataAsset), typeof(DynamicUMADnaAsset),
             typeof(RuntimeAnimatorController),typeof(AnimatorOverrideController),
@@ -101,5 +119,31 @@ namespace UMA
 
             return null;
         }
+
+        public virtual AssetItem GetAssetItem<T>(string name) where T : UnityEngine.Object
+        {
+            var @object= GetAsset<T>(name);
+            string path = "";
+            string guid = UnityEditor.AssetDatabase.GetAssetPath(@object);
+            path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+            var ai = new AssetItem(typeof(T), name, path, @object);
+            /*
+            foreach (AssetItem ai in TypeDic.Values)
+            {
+                if (Name == ai.EvilName)
+                {
+                    RebuildIndex();
+                    return ai;
+                }
+            }*/
+            return null;
+        }
+
+        public virtual void ReleaseReference(UnityEngine.Object obj)
+        {
+            
+        }
+
     }
+
 }

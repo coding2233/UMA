@@ -33,7 +33,7 @@ namespace UMA
 
         public static void UpdateRecipe(UMATextRecipe recipe)
         {
-            UMAAssetIndexer.Instance.ReleaseReference(recipe);
+             UMAContextAdpterIndexer.AdapterResource.ReleaseReference(recipe);
 
             List<DynamicCharacterAvatar> Avatars = GetSceneEditTimeAvatars();
 
@@ -53,7 +53,7 @@ namespace UMA
                         }
                     }
                 }
-                UMAAssetIndexer.Instance.ReleaseReference(recipe);
+                 UMAContextAdpterIndexer.AdapterResource.ReleaseReference(recipe);
                 return;
             }
 
@@ -76,7 +76,7 @@ namespace UMA
         public static void UpdateSlot(SlotDataAsset slot)
         {
             // look at the slot list of any generated UMA
-            UMAAssetIndexer.Instance.ReleaseReference(slot);
+             UMAContextAdpterIndexer.AdapterResource.ReleaseReference(slot);
             List<DynamicCharacterAvatar> Avatars = GetSceneEditTimeAvatars();
 
             foreach (DynamicCharacterAvatar dca in Avatars)
@@ -105,7 +105,7 @@ namespace UMA
 
         public static void UpdateOverlay(OverlayDataAsset overlay)
         {
-            UMAAssetIndexer.Instance.ReleaseReference(overlay);
+             UMAContextAdpterIndexer.AdapterResource.ReleaseReference(overlay);
             List<DynamicCharacterAvatar> Avatars = GetSceneEditTimeAvatars();
 
             foreach (DynamicCharacterAvatar dca in Avatars)
@@ -145,7 +145,7 @@ namespace UMA
 
         public static void UpdateRace(RaceData race)
         {
-            UMAAssetIndexer.Instance.ReleaseReference(race);
+             UMAContextAdpterIndexer.AdapterResource.ReleaseReference(race);
             List<DynamicCharacterAvatar> Avatars = GetSceneEditTimeAvatars();
 
             foreach (DynamicCharacterAvatar dca in Avatars)

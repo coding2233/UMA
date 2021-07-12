@@ -58,7 +58,7 @@ namespace UMA
 
 			if (UMAContext.Instance == null)
             {
-				AllDNA = UMAAssetIndexer.Instance.GetAllAssets<DynamicUMADnaAsset>();
+				AllDNA =  UMAContextAdpterIndexer.AdapterResource.GetAllAssets<DynamicUMADnaAsset>();
 			}
 			else
             {

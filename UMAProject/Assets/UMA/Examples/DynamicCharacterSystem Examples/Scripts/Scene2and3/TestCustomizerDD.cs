@@ -316,12 +316,12 @@ namespace UMA.CharacterSystem.Examples
 		{
 			List<string> slotsFromAllRaces = new List<string>();
 
-			List<RaceData> races = UMAAssetIndexer.Instance.GetAllAssets<RaceData>();
+			List<RaceData> races =  UMAContextAdpterIndexer.AdapterResource.GetAllAssets<RaceData>();
 			foreach (RaceData rd in races)
 			{
 				string race = rd.raceName;
 				int i = 0;
-				var recipes = UMAAssetIndexer.Instance.GetRecipes(race);
+				var recipes =  UMAContextAdpterIndexer.Instance.GetRecipes(race);
 				foreach (string slot in recipes.Keys)
 				{
 					if (!slotsFromAllRaces.Contains(slot) && ((limitWardrobeOptions.Count == 0 || limitWardrobeOptions.Contains(slot)) && !hideWardrobeOptions.Contains(slot)))
@@ -353,7 +353,7 @@ namespace UMA.CharacterSystem.Examples
 		{
 			if (Avatar != null)
 				thisRace = Avatar.activeRace.name;
-			var raceRecipes = UMAAssetIndexer.Instance.GetRecipes(thisRace);
+			var raceRecipes =  UMAContextAdpterIndexer.Instance.GetRecipes(thisRace);
 			InitializeWardrobeDropDowns();
 			foreach (Transform child in wardrobeDropdownPanel.transform)
 			{
@@ -453,7 +453,7 @@ namespace UMA.CharacterSystem.Examples
 
 		private void SetUpWardrobeCollectionDropdown(Transform childGO, Dropdown thisDD)
 		{
-			var raceRecipes = UMAAssetIndexer.Instance.GetRecipes(thisRace);
+			var raceRecipes =  UMAContextAdpterIndexer.Instance.GetRecipes(thisRace);
 			var thisSlot = "WardrobeCollection";
 			thisDD.options.Clear();
 			thisDD.onValueChanged.RemoveAllListeners();
@@ -729,7 +729,7 @@ namespace UMA.CharacterSystem.Examples
 		/// <param name="fSlotNumber">Id number slot to change</param>
 		public void SetSlot(string slotToChange, float fSlotNumber)
 		{
-			var raceRecipes = UMAAssetIndexer.Instance.GetRecipes(thisRace);
+			var raceRecipes =  UMAContextAdpterIndexer.Instance.GetRecipes(thisRace);
 			if (slotToChange == "WardrobeCollection")
 			{
 				SetWardrobeCollectionSlot(slotToChange, fSlotNumber);
@@ -757,7 +757,7 @@ namespace UMA.CharacterSystem.Examples
 
 		public void SetWardrobeCollectionSlot(string slotToChange, float fSlotNumber)
 		{
-			var raceRecipes = UMAAssetIndexer.Instance.GetRecipes(thisRace);
+			var raceRecipes =  UMAContextAdpterIndexer.Instance.GetRecipes(thisRace);
 			int slotNumber = ((int)fSlotNumber) - 1;
 			if (slotNumber >= 0)
 			{

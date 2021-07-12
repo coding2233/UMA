@@ -42,8 +42,8 @@ namespace UMA.CharacterSystem.Examples
 
 		public void Start()
 		{
-			UMAAssetIndexer index = UMAAssetIndexer.Instance;
-            races = index.GetAllAssets<RaceData>();
+			//UMAAssetIndexer index =  UMAContextAdpterIndexer.AdapterResource;
+            races = UMAContextAdpterIndexer.AdapterResource.GetAllAssets<RaceData>();
 #if UMA_ADDRESSABLES
             // Preload all the races.
             List<string> labels = new List<string>();
@@ -61,7 +61,7 @@ namespace UMA.CharacterSystem.Examples
 
             if (op.Result != null && op.Result.Count > 1)
             {
-                var recipeOp = UMAAssetIndexer.Instance.LoadLabelList(labels, true); // Load the recipes!
+                var recipeOp =  UMAContextAdpterIndexer.AdapterResource.LoadLabelList(labels, true); // Load the recipes!
                 recipeOp.Completed += Recipes_Loaded;
             }
 
@@ -78,7 +78,7 @@ namespace UMA.CharacterSystem.Examples
             {
                 if (PreloadAndUnload)
                 {
-                    var asyncop = UMAAssetIndexer.Instance.Preload(races, true); // Base races will always be loaded.
+                    var asyncop =  UMAContextAdpterIndexer.AdapterResource.Preload(races, true); // Base races will always be loaded.
                     asyncop.Completed += Asyncop_Completed;
                 }
             }
@@ -115,7 +115,7 @@ namespace UMA.CharacterSystem.Examples
         {
             //Debug.Log("Race Preload Completed.");
             // Preload any default wardrobe items on our avatar, now that the races are preloaded.
-            UMAAssetIndexer.Instance.Preload(Avatar, false).Completed += Avatar_Completed;
+             UMAContextAdpterIndexer.AdapterResource.Preload(Avatar, false).Completed += Avatar_Completed;
         }
         private void Avatar_Completed(UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationHandle<IList<Object>> obj)
 		{
@@ -162,7 +162,7 @@ namespace UMA.CharacterSystem.Examples
         public void UnloadAllItems(bool force)
 		{
 #if UMA_ADDRESSABLES
-			UMAAssetIndexer.Instance.UnloadAll(force);
+			 UMAContextAdpterIndexer.AdapterResource.UnloadAll(force);
 #endif
             Resources.UnloadUnusedAssets();
             GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
@@ -375,7 +375,7 @@ namespace UMA.CharacterSystem.Examples
 #if UMA_ADDRESSABLES
                 if (PreloadAndUnload)
                 {
-                    UMAAssetIndexer.Instance.UnloadAll(true);
+                     UMAContextAdpterIndexer.AdapterResource.UnloadAll(true);
                 }
 #endif
                 string race = RaceDropdown.options[index].text;
@@ -389,7 +389,7 @@ namespace UMA.CharacterSystem.Examples
 #if UMA_ADDRESSABLES
             if (PreloadAndUnload)
             {
-                var asyncop = UMAAssetIndexer.Instance.Preload(Avatar, false);
+                var asyncop =  UMAContextAdpterIndexer.AdapterResource.Preload(Avatar, false);
                 asyncop.Completed += Avatar_Completed;
             }
             else

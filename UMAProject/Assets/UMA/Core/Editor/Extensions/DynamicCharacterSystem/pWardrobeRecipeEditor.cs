@@ -330,7 +330,7 @@ namespace UMA.Editors
 		protected RaceData GetCompatibleRaceData(string raceName)
 		{
 			/* RaceData foundRace = null; */
-			return UMAAssetIndexer.Instance.GetAsset<RaceData>(raceName);
+			return  UMAContextAdpterIndexer.AdapterResource.GetAsset<RaceData>(raceName);
 		}
 
 		protected virtual bool DrawCompatibleRacesUI(Type TargetType, bool ShowHelp = false)
@@ -429,14 +429,14 @@ namespace UMA.Editors
 							butScene.width = addButsRect.width / 3f;
 							butIndex.xMin = butScene.xMax;
 							butIndex.width = (addButsRect.width / 3f)*2;
-                            if (GUI.Button(butScene,"Add to Scene Only", EditorStyles.miniButton))
-							{
-								UMAContextBase.Instance.AddRace(_compatibleRaceDatas[compatibleRaces[i]]);
-							}
-							if (GUI.Button(butIndex,"Add to Global Index (Recommended)", EditorStyles.miniButton))
-							{
-								UMAAssetIndexer.Instance.EvilAddAsset(typeof(RaceData), _compatibleRaceDatas[compatibleRaces[i]]);
-							}
+       //                     if (GUI.Button(butScene,"Add to Scene Only", EditorStyles.miniButton))
+							//{
+							//	UMAContextBase.Instance.AddRace(_compatibleRaceDatas[compatibleRaces[i]]);
+							//}
+							//if (GUI.Button(butIndex,"Add to Global Index (Recommended)", EditorStyles.miniButton))
+							//{
+							//	 UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(typeof(RaceData), _compatibleRaceDatas[compatibleRaces[i]]);
+							//}
 						}
 					}
 					GUI.enabled = false; //we readonly to prevent typos

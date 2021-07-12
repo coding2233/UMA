@@ -39,7 +39,7 @@ namespace UMA.CharacterSystem.Editors
 		{
 			if (UMAContext.Instance == null)
             {
-				var raceDatas = UMAAssetIndexer.Instance.GetAllAssets<RaceData>();
+				var raceDatas =  UMAContextAdpterIndexer.AdapterResource.GetAllAssets<RaceData>();
 				SetRaceLists(raceDatas.ToArray());
 				return;
             }

@@ -71,8 +71,8 @@ namespace UMA
 				showIndexedTypes = EditorPrefs.GetBool("BoolUMAShowTypes", true);
 				showUnindexedTypes = EditorPrefs.GetBool("BoolUMAShowUnindexed", false);
 
-				UMAAssetIndexer ai = UMAAssetIndexer.Instance;
-				if (showIndexedTypes && ai != null)
+				//UMAAssetIndexer ai =  UMAContextAdpterIndexer.AdapterResource;
+				if (showIndexedTypes && UMAContextAdpterIndexer.AdapterResource != null)
 				{
 					EditorApplication.projectWindowItemOnGUI += DrawItems;
 				}
@@ -309,9 +309,9 @@ namespace UMA
         private static void DrawItems(string guid, Rect selectionRect)
         {
             if (!showIndexedTypes) return;
-            if (UMAAssetIndexer.Instance == null) return;
+            if ( UMAContextAdpterIndexer.AdapterResource == null) return;
 
-			//AssetItem ai = UMAAssetIndexer.Instance.FromGuid(guid);
+			//AssetItem ai =  UMAContextAdpterIndexer.AdapterResource.FromGuid(guid);
 			AssetItem ai = null;
 
 			if (ai != null)
@@ -567,12 +567,12 @@ namespace UMA
 			// Write the asset to disk
 			AssetDatabase.CreateAsset(asset, path);
 			AssetDatabase.SaveAssets();
-			if (addToGlobalLibrary)
-			{
-				// Add it to the global libary
-				UMAAssetIndexer.Instance.EvilAddAsset(typeof(CharacterSystem.UMAWardrobeRecipe), asset);
-				//EditorUtility.SetDirty(UMAAssetIndexer.Instance);
-			}
+			//if (addToGlobalLibrary)
+			//{
+			//	// Add it to the global libary
+			//	 UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(typeof(CharacterSystem.UMAWardrobeRecipe), asset);
+			//	//EditorUtility.SetDirty( UMAContextAdpterIndexer.AdapterResource);
+			//}
 			// Inform the asset database a file has changes
 			AssetDatabase.Refresh();
 			return asset;

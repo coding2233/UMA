@@ -182,7 +182,7 @@ namespace UMA
 
 		public void LoadFromIndex()
         {
-			material = UMAAssetIndexer.Instance.GetAsset<UMAMaterial>(materialName);
+			material =  UMAContextAdpterIndexer.AdapterResource.GetAsset<UMAMaterial>(materialName);
         }
 
 		//UMA 2.8 FixDNAPrefabs: Swaps the legacy converter (DnaConverterBehaviour Prefab) for the new DNAConverterController

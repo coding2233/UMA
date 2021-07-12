@@ -2964,8 +2964,9 @@ namespace UMA.CharacterSystem
 
         public void LoadFromAssetFile(string Name)
         {
-            UMAAssetIndexer UAI = UMAAssetIndexer.Instance;
-            AssetItem ai = UAI.GetAssetItem<UMATextRecipe>(Name.Trim());
+            //UMAAssetIndexer UAI =  UMAContextAdpterIndexer.AdapterResource;
+            var adapterResource = UMAContextAdpterIndexer.AdapterResource;
+            AssetItem ai = adapterResource.GetAssetItem<UMATextRecipe>(Name.Trim());
             if (ai != null)
             {
                 string recipeString = (ai.Item as UMATextRecipe).recipeString;
@@ -2978,8 +2979,8 @@ namespace UMA.CharacterSystem
 
         public void LoadFromTextFile(string Name)
         {
-            UMAAssetIndexer UAI = UMAAssetIndexer.Instance;
-            AssetItem ai = UAI.GetAssetItem<TextAsset>(Name.Trim());
+            //UMAAssetIndexer UAI =  UMAContextAdpterIndexer.AdapterResource;
+            AssetItem ai = UMAContextAdpterIndexer.AdapterResource.GetAssetItem<TextAsset>(Name.Trim());
             if (ai != null)
             {
                 string recipeString = (ai.Item as TextAsset).text;
@@ -3007,15 +3008,15 @@ namespace UMA.CharacterSystem
 #endif
             if (loadPathType == loadPathTypes.CharacterSystem)
             {
-                UMAAssetIndexer UAI = UMAAssetIndexer.Instance;
-                AssetItem ai = UAI.GetAssetItem<UMATextRecipe>(loadFilename.Trim());
+                //UMAAssetIndexer UAI =  UMAContextAdpterIndexer.AdapterResource;
+                AssetItem ai = UMAContextAdpterIndexer.AdapterResource.GetAssetItem<UMATextRecipe>(loadFilename.Trim());
                 if (ai != null)
                 {
                     recipeString = (ai.Item as UMATextRecipe).recipeString;
                 }
                 else
                 {
-                    ai = UAI.GetAssetItem<TextAsset>(loadFilename.Trim());
+                    ai = UMAContextAdpterIndexer.AdapterResource.GetAssetItem<TextAsset>(loadFilename.Trim());
 
                     if (ai != null)
                     {
@@ -3475,7 +3476,7 @@ namespace UMA.CharacterSystem
                 /* and call this function again, telling it to skip   */
                 /* bundle checking                                    */
 
-                var theOp = UMAAssetIndexer.Instance.Preload(this);
+                var theOp =  UMAContextAdpterIndexer.AdapterResource.Preload(this);
                 LoadedHandles.Enqueue(theOp);
                 LoadQueue.Add(theOp,new BuildSave( umaRecipe,Replaces,umaAdditionalSerializedRecipes,AdditionalRecipes, MeshHideDictionary, hiddenSlots, HideTags, CurrentDNA, restoreDNA));
                 theOp.Completed += LoadWhenReady;
@@ -4208,7 +4209,7 @@ namespace UMA.CharacterSystem
                     {
                         if (animators[i].animatorController == null)
                         {
-							animators[i].animatorController = UMAAssetIndexer.Instance.GetAsset<RuntimeAnimatorController>(animators[i].animatorControllerName);
+							animators[i].animatorController =  UMAContextAdpterIndexer.AdapterResource.GetAsset<RuntimeAnimatorController>(animators[i].animatorControllerName);
                         }
                         if (animators[i].animatorController != null)
                         {
@@ -4507,7 +4508,7 @@ namespace UMA.CharacterSystem
 
             foreach (WardrobeSettings wardrobe in copiedList.wardrobeSet)
             {
-                UMATextRecipe recipe = UMAAssetIndexer.Instance.GetAsset<UMATextRecipe>(wardrobe.recipe);
+                UMATextRecipe recipe =  UMAContextAdpterIndexer.AdapterResource.GetAsset<UMATextRecipe>(wardrobe.recipe);
                 if (recipe != null)
                 {
                     WardrobeRecipeListItem item = new WardrobeRecipeListItem(recipe);

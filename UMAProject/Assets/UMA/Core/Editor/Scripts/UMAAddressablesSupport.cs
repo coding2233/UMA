@@ -122,7 +122,7 @@ namespace UMA
 
             if (RemoveFlags)
             {
-                UMAAssetIndexer.Instance.ClearAddressableFlags();
+                 UMAContextAdpterIndexer.AdapterResource.ClearAddressableFlags();
             }
             EditorUtility.ClearProgressBar();
         }
@@ -142,7 +142,7 @@ namespace UMA
                 EditorUtility.DisplayProgressBar("Generating", "Calculating Usage: " + uwr.name, iPos);
 
                 // todo: cache this
-                UMAData.UMARecipe ur = UMAAssetIndexer.Instance.GetRecipe(uwr, context);
+                UMAData.UMARecipe ur =  UMAContextAdpterIndexer.AdapterResource.GetRecipe(uwr, context);
 
                 if (ur.slotDataList == null) continue;
 
@@ -150,7 +150,7 @@ namespace UMA
                 {
                     if (sd == null) continue;
 
-                    AssetItem ai = UMAAssetIndexer.Instance.GetAssetItem<SlotDataAsset>(sd.slotName);
+                    AssetItem ai =  UMAContextAdpterIndexer.AdapterResource.GetAssetItem<SlotDataAsset>(sd.slotName);
 
                     if (ai != null && ai.IsAlwaysLoaded == false)
                     {
@@ -290,7 +290,7 @@ namespace UMA
                         // get the name here
                         foreach (UMATextRecipe uwr in kp.Value)
                         {
-                            ae.SetLabel(UMAAssetIndexer.Instance.GetLabel(uwr), true, true, true);
+                            ae.SetLabel( UMAContextAdpterIndexer.AdapterResource.GetLabel(uwr), true, true, true);
                         }
                     }
                 }
@@ -306,8 +306,8 @@ namespace UMA
             //**********************************************************************************************
             //* Add Wardrobe Collections
             //**********************************************************************************************
-            Type theType = UMAAssetIndexer.Instance.GetIndexedType(typeof(UMAWardrobeCollection));
-            var wardrobecollections = UMAAssetIndexer.Instance.GetAssetDictionary(theType).Values;
+            Type theType =  UMAContextAdpterIndexer.AdapterResource.GetIndexedType(typeof(UMAWardrobeCollection));
+            var wardrobecollections =  UMAContextAdpterIndexer.AdapterResource.GetAssetDictionary(theType).Values;
 
             foreach (AssetItem ai in wardrobecollections)
             {
@@ -336,7 +336,7 @@ namespace UMA
             if (string.IsNullOrEmpty(recipeName))
                 return;
 
-            AssetItem recipeAsset = UMAAssetIndexer.Instance.GetAssetItem<UMAWardrobeRecipe>(recipeName);
+            AssetItem recipeAsset =  UMAContextAdpterIndexer.AdapterResource.GetAssetItem<UMAWardrobeRecipe>(recipeName);
             if (recipeAsset != null)
             {
                 UMAWardrobeRecipe uwr = recipeAsset.Item as UMAWardrobeRecipe;
@@ -345,7 +345,7 @@ namespace UMA
                     Debug.Log("Null recipe in wardrobe collection...");
                     return;
                 }
-                List<AssetItem> items = UMAAssetIndexer.Instance.GetAssetItems(uwr, true);
+                List<AssetItem> items =  UMAContextAdpterIndexer.AdapterResource.GetAssetItems(uwr, true);
                 foreach (AssetItem recipeitem in items)
                 {
                     if (recipeitem.Item is SlotDataAsset)
@@ -399,8 +399,8 @@ namespace UMA
             //* Add Wardrobe Recipes
             //**********************************************************************************************
 
-            theType = UMAAssetIndexer.Instance.GetIndexedType(typeof(UMAWardrobeRecipe));
-            var wardrobe = UMAAssetIndexer.Instance.GetAssetDictionary(theType).Values;
+            theType =  UMAContextAdpterIndexer.AdapterResource.GetIndexedType(typeof(UMAWardrobeRecipe));
+            var wardrobe =  UMAContextAdpterIndexer.AdapterResource.GetAssetDictionary(theType).Values;
 
             foreach (AssetItem ai in wardrobe)
             {
@@ -409,7 +409,7 @@ namespace UMA
                 {
                     if (uwr.resourcesOnly)
                     {
-                        var items = UMAAssetIndexer.Instance.GetAssetItems(uwr);
+                        var items =  UMAContextAdpterIndexer.AdapterResource.GetAssetItems(uwr);
                         foreach (AssetItem resourceItem in items)
                         {
                             resourceItem.IsResource = true;
@@ -420,8 +420,8 @@ namespace UMA
                 }
             }
 
-            theType = UMAAssetIndexer.Instance.GetIndexedType(typeof(UMATextRecipe));
-            var trecipes = UMAAssetIndexer.Instance.GetAssetDictionary(theType).Values;
+            theType =  UMAContextAdpterIndexer.AdapterResource.GetIndexedType(typeof(UMATextRecipe));
+            var trecipes =  UMAContextAdpterIndexer.AdapterResource.GetAssetDictionary(theType).Values;
 
             foreach (AssetItem ai in trecipes)
             {
@@ -430,7 +430,7 @@ namespace UMA
                 {
                     if (utr.resourcesOnly)
                     {
-                        var items = UMAAssetIndexer.Instance.GetAssetItems(utr);
+                        var items =  UMAContextAdpterIndexer.AdapterResource.GetAssetItems(utr);
                         foreach (AssetItem resourceItem in items)
                         {
                             resourceItem.IsResource = true;
@@ -441,8 +441,8 @@ namespace UMA
                 }
             }
 
-            theType = UMAAssetIndexer.Instance.GetIndexedType(typeof(UMAWardrobeCollection));
-            var wcrecipes = UMAAssetIndexer.Instance.GetAssetDictionary(theType).Values;
+            theType =  UMAContextAdpterIndexer.AdapterResource.GetIndexedType(typeof(UMAWardrobeCollection));
+            var wcrecipes =  UMAContextAdpterIndexer.AdapterResource.GetAssetDictionary(theType).Values;
 
             foreach (AssetItem ai in wcrecipes)
             {
@@ -451,7 +451,7 @@ namespace UMA
                 {
                     if (utr.resourcesOnly)
                     {
-                        var items = UMAAssetIndexer.Instance.GetAssetItems(utr);
+                        var items =  UMAContextAdpterIndexer.AdapterResource.GetAssetItems(utr);
                         foreach (AssetItem resourceItem in items)
                         {
                             resourceItem.IsResource = true;
@@ -489,7 +489,7 @@ namespace UMA
 
         public bool AddRecipeGroup(UMATextRecipe recipe)
         {
-            List<AssetItem> items = UMAAssetIndexer.Instance.GetAssetItems(recipe, true);
+            List<AssetItem> items =  UMAContextAdpterIndexer.AdapterResource.GetAssetItems(recipe, true);
 
             List<AssetItem> UniqueItems = new List<AssetItem>();
             foreach (AssetItem ai in items)
@@ -565,7 +565,7 @@ namespace UMA
             bool OK = plugin.Prepare();
             if (!OK) return;
 
-            foreach (Type t in UMAAssetIndexer.Instance.GetTypes())
+            foreach (Type t in  UMAContextAdpterIndexer.AdapterResource.GetTypes())
             {
                 ClearAddressableFlags(t);
             }
@@ -585,7 +585,7 @@ namespace UMA
 
             StringBuilder sb = new StringBuilder();
 
-            List<AssetItem> SerializedItems = UMAAssetIndexer.Instance.UpdateSerializedList();
+            List<AssetItem> SerializedItems =  UMAContextAdpterIndexer.AdapterResource.UpdateSerializedList();
             foreach (AssetItem ai in SerializedItems)
             {
                 List<string> labels = plugin.ProcessItem(ai);
@@ -657,7 +657,7 @@ namespace UMA
                 ClearAddressableFlags(typeof(OverlayDataAsset));
 
                 // Will generate an editor context if needed.
-                UMAContextBase context = UMAAssetIndexer.Instance.GetContext();
+                UMAContextBase context =  UMAContextAdpterIndexer.AdapterResource.GetContext();
 
                 // Create the shared group that has each item packed separately.
                 AddressableAssetGroup sharedGroup = AddressableUtility.AddressableSettings.CreateGroup(SharedGroupName, false, false, true, AddressableUtility.AddressableSettings.DefaultGroup.Schemas);
@@ -669,8 +669,8 @@ namespace UMA
                 //*  Add Races
                 //**********************************************************************************************
 
-                System.Type theType = UMAAssetIndexer.Instance.GetIndexedType(typeof(RaceData));
-                var races = UMAAssetIndexer.Instance.GetAssetDictionary(theType).Values;
+                System.Type theType =  UMAContextAdpterIndexer.AdapterResource.GetIndexedType(typeof(RaceData));
+                var races =  UMAContextAdpterIndexer.AdapterResource.GetAssetDictionary(theType).Values;
 
                 foreach (AssetItem ai in races)
                 {
@@ -687,10 +687,10 @@ namespace UMA
                     theRecipes.Add(race.baseRaceRecipe as UMATextRecipe);
                     if (ai.IsAlwaysLoaded)
                     {
-                        AssetItem recipe = UMAAssetIndexer.Instance.GetAssetItem<UMATextRecipe>(race.baseRaceRecipe.name);
+                        AssetItem recipe =  UMAContextAdpterIndexer.AdapterResource.GetAssetItem<UMATextRecipe>(race.baseRaceRecipe.name);
                         recipe.IsAlwaysLoaded = true;
 
-                        List<AssetItem> recipeItems = UMAAssetIndexer.Instance.GetAssetItems(race.baseRaceRecipe as UMAPackedRecipeBase, true);
+                        List<AssetItem> recipeItems =  UMAContextAdpterIndexer.AdapterResource.GetAssetItems(race.baseRaceRecipe as UMAPackedRecipeBase, true);
                         foreach (AssetItem recipeitem in recipeItems)
                         {
                             recipeitem.IsAlwaysLoaded = true;
@@ -746,8 +746,8 @@ namespace UMA
 
                 AssignAddressableInformation();
 
-                ReleaseReferences(UMAAssetIndexer.Instance.GetIndexedType(typeof(SlotDataAsset)));
-                ReleaseReferences(UMAAssetIndexer.Instance.GetIndexedType(typeof(OverlayDataAsset)));
+                ReleaseReferences( UMAContextAdpterIndexer.AdapterResource.GetIndexedType(typeof(SlotDataAsset)));
+                ReleaseReferences( UMAContextAdpterIndexer.AdapterResource.GetIndexedType(typeof(OverlayDataAsset)));
 
                 CleanupAddressables(true);
 
@@ -755,14 +755,14 @@ namespace UMA
             finally
             {
                 EditorUtility.ClearProgressBar();
-                UMAAssetIndexer.Instance.DestroyEditorUMAContextBase();
-                UMAAssetIndexer.Instance.ForceSave();
+                 UMAContextAdpterIndexer.AdapterResource.DestroyEditorUMAContextBase();
+                 UMAContextAdpterIndexer.AdapterResource.ForceSave();
             }
         }
 
         public void AssignAddressableInformation()
         {
-            List<AssetItem> SerializedItems = UMAAssetIndexer.Instance.UpdateSerializedList();
+            List<AssetItem> SerializedItems =  UMAContextAdpterIndexer.AdapterResource.UpdateSerializedList();
             foreach (AssetItem ai in SerializedItems)
             {
                 AddressableAssetEntry ae = AddressableUtility.GetAddressableAssetEntry(ai._Path);
@@ -791,7 +791,7 @@ namespace UMA
 
         public void CleanupOrphans(Type type)
         {
-            var items = UMAAssetIndexer.Instance.GetAssetDictionary(type);
+            var items =  UMAContextAdpterIndexer.AdapterResource.GetAssetDictionary(type);
 
             List<string> toRemove = new List<string>();
             foreach (KeyValuePair<string, AssetItem> pair in items)
@@ -806,12 +806,12 @@ namespace UMA
             {
                 items.Remove(key);
             }
-            UMAAssetIndexer.Instance.ForceSave();
+             UMAContextAdpterIndexer.AdapterResource.ForceSave();
         }
 
         public void ReleaseReferences(Type type)
         {
-            var items = UMAAssetIndexer.Instance.GetAssetDictionary(type).Values;
+            var items =  UMAContextAdpterIndexer.AdapterResource.GetAssetDictionary(type).Values;
             foreach (AssetItem ai in items)
             {
                 //if (ai.IsAlwaysLoaded)
@@ -827,7 +827,7 @@ namespace UMA
 
         public void ClearAddressableFlags(Type type)
         {
-            var items = UMAAssetIndexer.Instance.GetAssetDictionary(type).Values;
+            var items =  UMAContextAdpterIndexer.AdapterResource.GetAssetDictionary(type).Values;
             foreach (AssetItem ai in items)
             {
                 if (ai.IsAddressable)

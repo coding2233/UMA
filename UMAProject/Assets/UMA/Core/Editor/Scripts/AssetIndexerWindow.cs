@@ -104,7 +104,7 @@
 //        {
 //            get
 //            {
-//                return UMAAssetIndexer.Instance;
+//                return UMAContextAdpterIndexer.AdapterResource;
 //            }
 //        }
 
@@ -353,7 +353,7 @@
 
 //			AddMenuItemWithCallback(_AddressablesMenu, "Generators/Postbuild Material Fixup", () =>
 //			{
-//				UMAAssetIndexer.Instance.PostBuildMaterialFixup();
+//				 UMAContextAdpterIndexer.AdapterResource.PostBuildMaterialFixup();
 //				Repaint();
 //			});
 
@@ -442,7 +442,7 @@
 //            AddMenuItemWithCallback(ToolsMenu, "Validate All Indexed Slots", () =>
 //            {
 //                EditorUtility.DisplayProgressBar("Validating", "Validating Slots", 0.0f);
-//                List<SlotDataAsset> slots = UMAAssetIndexer.Instance.GetAllAssets<SlotDataAsset>();
+//                List<SlotDataAsset> slots = UMAContextAdpterIndexer.AdapterResource.GetAllAssets<SlotDataAsset>();
 //                List<SlotDataAsset> BadSlots = new List<SlotDataAsset>();
 
 //                for (int i = 0; i < slots.Count; i++)
@@ -678,7 +678,7 @@
 //        private List<UnityEngine.Object> GetRecipeDependencies(UMATextRecipe uMATextRecipe)
 //        {
 //            List<UnityEngine.Object> objects = new List<UnityEngine.Object>();
-//            List<AssetItem> dependencies = UMAAssetIndexer.Instance.GetAssetItems(uMATextRecipe, true);
+//            List<AssetItem> dependencies = UMAContextAdpterIndexer.AdapterResource.GetAssetItems(uMATextRecipe, true);
 
 //            foreach (AssetItem ai in dependencies)
 //            {
@@ -850,7 +850,7 @@
 //                    tr.ai.IsAlwaysLoaded = Keep;
 //                }
 //            }
-//            UMAAssetIndexer.Instance.ForceSave();
+//            UMAContextAdpterIndexer.AdapterResource.ForceSave();
 //            RecountTypes();
 //        }
 

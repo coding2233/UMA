@@ -85,12 +85,12 @@ namespace UMA
 			EditorUtility.SetDirty(duda);
 			EditorUtility.SetDirty(bp);
 			EditorUtility.SetDirty(bpdcp);
-			if (addToLibrary)
-			{
-				UMAAssetIndexer.Instance.EvilAddAsset(typeof(SlotDataAsset), sda);
-				UMAAssetIndexer.Instance.EvilAddAsset(typeof(DynamicUMADnaAsset), duda);
-				//EditorUtility.SetDirty(UMAAssetIndexer.Instance);
-			}
+			//if (addToLibrary)
+			//{
+			//	 UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(typeof(SlotDataAsset), sda);
+			//	 UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(typeof(DynamicUMADnaAsset), duda);
+			//	//EditorUtility.SetDirty( UMAContextAdpterIndexer.AdapterResource);
+			//}
 
 			if (createWardrobeRecipe)
 			{

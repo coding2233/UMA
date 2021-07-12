@@ -30,7 +30,7 @@ namespace UMA
 					_assetSlotName = _asset.slotName;
 					_asset = null;
 				}
-				return UMAAssetIndexer.Instance.GetAsset<SlotDataAsset>(_assetSlotName);
+				return  UMAContextAdpterIndexer.AdapterResource.GetAsset<SlotDataAsset>(_assetSlotName);
 			}
 			set
             {

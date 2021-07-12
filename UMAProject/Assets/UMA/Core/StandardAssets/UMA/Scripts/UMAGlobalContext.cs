@@ -20,9 +20,9 @@ namespace UMA
 		/// </summary>
 		public override void ValidateDictionaries()
 		{
-			UMAAssetIndexer.Instance.RebuildIndex();
+			 UMAAssetIndexer.Instance.RebuildIndex();
 #if UNITY_EDITOR
-			UMAAssetIndexer.Instance.ForceSave();
+			 UMAAssetIndexer.Instance.ForceSave();
 #endif
 		}
 
@@ -33,7 +33,7 @@ namespace UMA
 		/// <param name="name">Name.</param>
 		public override RaceData HasRace(string name)
 		{
-			return UMAAssetIndexer.Instance.GetAsset<RaceData>(name);
+			return  UMAAssetIndexer.Instance.GetAsset<RaceData>(name);
 		}
 		/// <summary>
 		/// Gets a race by name hash, if it has been added to the library.
@@ -60,7 +60,7 @@ namespace UMA
 		/// <param name="name">Name.</param>
 		public override RaceData GetRace(string name)
 		{
-			return UMAAssetIndexer.Instance.GetAsset<RaceData>(name);
+			return  UMAAssetIndexer.Instance.GetAsset<RaceData>(name);
 		}
 		/// <summary>
 		/// Gets a race by name hash, if the library is a DynamicRaceLibrary it will try to find it.
@@ -83,7 +83,7 @@ namespace UMA
 		/// <returns>The array of race data.</returns>
 		public override RaceData[] GetAllRaces()
 		{
-			return UMAAssetIndexer.Instance.GetAllAssets<RaceData>().ToArray();
+			return  UMAAssetIndexer.Instance.GetAllAssets<RaceData>().ToArray();
 		}
 
 		public override RaceData[] GetAllRacesBase()
@@ -99,7 +99,7 @@ namespace UMA
 		public override void AddRace(RaceData race)
 		{
 			AssetItem ai = new AssetItem(typeof(RaceData), race);
-			UMAAssetIndexer.Instance.AddAsset(typeof(RaceData), race.raceName,"", race);
+			 UMAAssetIndexer.Instance.AddAsset(typeof(RaceData), race.raceName,"", race);
 			//if (dynamicCharacterSystem != null)
 			//{
 			//	dynamicCharacterSystem.RefreshRaceKeys();
@@ -116,7 +116,7 @@ namespace UMA
 #if SUPER_LOGGING
 			Debug.Log("Instantiating slot: " + name);
 #endif
-			SlotDataAsset source = UMAAssetIndexer.Instance.GetAsset<SlotDataAsset>(name);
+			SlotDataAsset source =  UMAAssetIndexer.Instance.GetAsset<SlotDataAsset>(name);
 			if (source == null)
 			{
 				throw new UMAResourceNotFoundException("UMAGlobalContext: Unable to find SlotDataAsset: " + name);
@@ -131,7 +131,7 @@ namespace UMA
 		/// <param name="nameHash">Name hash.</param>
 		public override SlotData InstantiateSlot(int nameHash)
 		{
-			SlotDataAsset source = UMAAssetIndexer.Instance.GetAsset<SlotDataAsset>(nameHash);
+			SlotDataAsset source =  UMAAssetIndexer.Instance.GetAsset<SlotDataAsset>(nameHash);
 			if (source == null)
 			{
 				throw new UMAResourceNotFoundException("UMAGlobalContext: Unable to find SlotDataAsset: " + name);
@@ -174,7 +174,7 @@ namespace UMA
 		/// <param name="name">Name.</param>
 		public override bool HasSlot(string name)
 		{
-			return UMAAssetIndexer.Instance.HasAsset<SlotDataAsset>(name);
+			return  UMAAssetIndexer.Instance.HasAsset<SlotDataAsset>(name);
 		}
 
 		/// <summary>
@@ -184,7 +184,7 @@ namespace UMA
 		/// <param name="nameHash">Name hash.</param>
 		public override bool HasSlot(int nameHash)
 		{
-			return UMAAssetIndexer.Instance.HasAsset<SlotDataAsset>(nameHash);
+			return  UMAAssetIndexer.Instance.HasAsset<SlotDataAsset>(nameHash);
 		}
 
 		/// <summary>
@@ -193,7 +193,7 @@ namespace UMA
 		/// <param name="slot">New slot asset.</param>
 		public override void AddSlotAsset(SlotDataAsset slot)
 		{
-			UMAAssetIndexer.Instance.AddAsset(typeof(SlotDataAsset), slot.slotName, "", slot);	
+			 UMAAssetIndexer.Instance.AddAsset(typeof(SlotDataAsset), slot.slotName, "", slot);	
 		}
 
 		/// <summary>
@@ -203,7 +203,7 @@ namespace UMA
 		/// <param name="name">Name.</param>
 		public override bool HasOverlay(string name)
 		{
-			return UMAAssetIndexer.Instance.HasAsset<OverlayDataAsset>(name);
+			return  UMAAssetIndexer.Instance.HasAsset<OverlayDataAsset>(name);
 		}
 		/// <summary>
 		/// Check for presence of an overlay by name hash.
@@ -212,7 +212,7 @@ namespace UMA
 		/// <param name="nameHash">Name hash.</param>
 		public override bool HasOverlay(int nameHash)
 		{
-			return UMAAssetIndexer.Instance.HasAsset<OverlayDataAsset>(nameHash);
+			return  UMAAssetIndexer.Instance.HasAsset<OverlayDataAsset>(nameHash);
 		}
 
 		/// <summary>
@@ -225,7 +225,7 @@ namespace UMA
 #if SUPER_LOGGING
 			Debug.Log("Instantiating Overlay: " + name);
 #endif
-			OverlayDataAsset source = UMAAssetIndexer.Instance.GetAsset<OverlayDataAsset>(name);
+			OverlayDataAsset source =  UMAAssetIndexer.Instance.GetAsset<OverlayDataAsset>(name);
 			if (source == null)
 			{
 				throw new UMAResourceNotFoundException("UMAGlobalContext: Unable to find OverlayDataAsset: " + name);
@@ -240,7 +240,7 @@ namespace UMA
 		/// <param name="nameHash">Name hash.</param>
 		public override OverlayData InstantiateOverlay(int nameHash)
 		{
-			OverlayDataAsset source = UMAAssetIndexer.Instance.GetAsset<OverlayDataAsset>(nameHash);
+			OverlayDataAsset source =  UMAAssetIndexer.Instance.GetAsset<OverlayDataAsset>(nameHash);
 			if (source == null)
 			{
 				throw new UMAResourceNotFoundException("UMAGlobalContext: Unable to find OverlayDataAsset: " + nameHash);
@@ -282,41 +282,41 @@ namespace UMA
 		/// <param name="overlay">New overlay asset.</param>
 		public override void AddOverlayAsset(OverlayDataAsset overlay)
 		{
-			UMAAssetIndexer.Instance.AddAsset(typeof(OverlayDataAsset), overlay.overlayName, "", overlay);
+			 UMAAssetIndexer.Instance.AddAsset(typeof(OverlayDataAsset), overlay.overlayName, "", overlay);
 		}
 
 		// Get all DNA
 		public override List<DynamicUMADnaAsset> GetAllDNA()
 		{
-			return UMAAssetIndexer.Instance.GetAllAssets<DynamicUMADnaAsset>();
+			return  UMAAssetIndexer.Instance.GetAllAssets<DynamicUMADnaAsset>();
 		}
 
 		// Get a DNA Asset By Name
 		public override DynamicUMADnaAsset GetDNA(string Name)
 		{
-			return UMAAssetIndexer.Instance.GetAsset<DynamicUMADnaAsset>(Name);
+			return  UMAAssetIndexer.Instance.GetAsset<DynamicUMADnaAsset>(Name);
 		}
 
 		public override RuntimeAnimatorController GetAnimatorController(string Name)
 		{
-			return UMAAssetIndexer.Instance.GetAsset<RuntimeAnimatorController>(Name);
+			return  UMAAssetIndexer.Instance.GetAsset<RuntimeAnimatorController>(Name);
 		}
 
 		public override List<RuntimeAnimatorController> GetAllAnimatorControllers()
 		{
-			return UMAAssetIndexer.Instance.GetAllAssets<RuntimeAnimatorController>();
+			return  UMAAssetIndexer.Instance.GetAllAssets<RuntimeAnimatorController>();
 		}
 
 		public override void AddRecipe(UMATextRecipe recipe)
 		{
-			UMAAssetIndexer.Instance.AddAsset(recipe.GetType(), recipe.name, "", recipe);
+			 UMAAssetIndexer.Instance.AddAsset(recipe.GetType(), recipe.name, "", recipe);
 		}
 
 		public override UMATextRecipe GetRecipe(string filename, bool dynamicallyAdd = true)
 		{
-			UMATextRecipe recipe = UMAAssetIndexer.Instance.GetAsset<UMAWardrobeRecipe>(filename);
+			UMATextRecipe recipe =  UMAAssetIndexer.Instance.GetAsset<UMAWardrobeRecipe>(filename);
 			if (recipe == null)
-				recipe = UMAAssetIndexer.Instance.GetAsset<UMAWardrobeCollection>(filename);
+				recipe =  UMAAssetIndexer.Instance.GetAsset<UMAWardrobeCollection>(filename);
 			return recipe;
 		}
 
@@ -341,9 +341,9 @@ namespace UMA
 
 		public override bool HasRecipe(string Name)
 		{
-			bool found = UMAAssetIndexer.Instance.HasAsset<UMAWardrobeRecipe>(Name);
+			bool found =  UMAAssetIndexer.Instance.HasAsset<UMAWardrobeRecipe>(Name);
 			if (!found)
-				found = UMAAssetIndexer.Instance.HasAsset<UMAWardrobeCollection>(Name);
+				found =  UMAAssetIndexer.Instance.HasAsset<UMAWardrobeCollection>(Name);
 			return found;
 		}
 
@@ -354,22 +354,22 @@ namespace UMA
 		/// <returns></returns>
 		public override bool CheckRecipeAvailability(string recipeName)
 		{
-			return UMAAssetIndexer.Instance.HasAsset<UMAWardrobeRecipe>(recipeName);
+			return  UMAAssetIndexer.Instance.HasAsset<UMAWardrobeRecipe>(recipeName);
 		}
 
 		public override List<string> GetRecipeNamesForRaceSlot(string race, string slot)
 		{
-			return UMAAssetIndexer.Instance.GetRecipeNamesForRaceSlot(race, slot);
+			return  UMAAssetIndexer.Instance.GetRecipeNamesForRaceSlot(race, slot);
 		}
 
 		public override List<UMARecipeBase> GetRecipesForRaceSlot(string race, string slot)
 		{
-			return UMAAssetIndexer.Instance.GetRecipesForRaceSlot(race, slot);
+			return  UMAAssetIndexer.Instance.GetRecipesForRaceSlot(race, slot);
 		}
 
 		public override Dictionary<string, List<UMATextRecipe>> GetRecipes(string raceName)
 		{
-			return UMAAssetIndexer.Instance.GetRecipes(raceName);
+			return  UMAAssetIndexer.Instance.GetRecipes(raceName);
 		}
 	}
 }

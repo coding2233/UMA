@@ -649,7 +649,7 @@ namespace UMA.CharacterSystem
             if (searchResources)
             {
                 //using UMAAssetIndexer!!
-                if (UMAAssetIndexer.Instance != null)
+                if ( UMAContextAdpterIndexer.AdapterResource != null)
                 {
                     found = AddAssetsFromResourcesIndex<T>(ref assetsToReturn, resourcesFolderPathArray, assetNameHash, assetName);
                 }
@@ -683,7 +683,7 @@ namespace UMA.CharacterSystem
         {
             bool found = false;
             //Use new UMAAssetIndexer!!
-            if (UMAAssetIndexer.Instance == null)
+            if ( UMAContextAdpterIndexer.AdapterResource == null)
                 return found;
             if (assetNameHash != null || assetName != "")
             {
@@ -691,20 +691,23 @@ namespace UMA.CharacterSystem
                 if (assetNameHash != null)
                 {
                     //using UMAAssetIndexer
-                    foundAsset = (UMAAssetIndexer.Instance.GetAsset<T>((int)assetNameHash, resourcesFolderPathArray) as T);
+                    foundAsset = (UMAContextAdpterIndexer.AdapterResource.GetAsset<T>((int)assetNameHash) as T);
                 }
                 else if (assetName != "")
                 {
-					//check if its a Placeholder asset that has been requested directly- this happens when the UMATextRecipePlaceholder tries to load
-					var typePlaceholderName = typeof(T).ToString().Replace(typeof(T).Namespace + ".", "") + "Placeholder";
-					if (typePlaceholderName == assetName || typePlaceholderName + "_Slot" == assetName)
-					{
-						foundAsset = GetPlaceholderAsset<T>(assetName);
-					}
-					//using UMAAssetIndexer
-					if (foundAsset == null)
-						foundAsset = (UMAAssetIndexer.Instance.GetAsset<T>(assetName, resourcesFolderPathArray) as T);
-				}
+                    //check if its a Placeholder asset that has been requested directly- this happens when the UMATextRecipePlaceholder tries to load
+                    var typePlaceholderName = typeof(T).ToString().Replace(typeof(T).Namespace + ".", "") + "Placeholder";
+                    if (typePlaceholderName == assetName || typePlaceholderName + "_Slot" == assetName)
+                    {
+                        foundAsset = GetPlaceholderAsset<T>(assetName);
+                    }
+                    //using UMAAssetIndexer
+                    if (foundAsset == null)
+                    {
+                        foundAsset = (UMAContextAdpterIndexer.AdapterResource.GetAsset<T>(assetName) as T);
+                        //foundAsset = (UMAContextAdpterIndexer.AdapterResource.GetAsset<T>(assetName, resourcesFolderPathArray) as T);
+                    }
+                }
 				if (foundAsset != null)
                 {
                     assetsToReturn.Add(foundAsset);
@@ -714,7 +717,7 @@ namespace UMA.CharacterSystem
             else if (assetNameHash == null && assetName == "")
             {
 				//Using UMAAssetIndexer
-				List<T> assetIndexerAssets = UMAAssetIndexer.Instance.GetAllAssets<T>(resourcesFolderPathArray) as List<T>;
+				List<T> assetIndexerAssets =  UMAContextAdpterIndexer.AdapterResource.GetAllAssets<T>(resourcesFolderPathArray) as List<T>;
 				List<T> assetIndexerAssetsToAdd = new List<T>();
 				//UMAAssetIndexer returns null assets so check for that
 				if (assetIndexerAssets.Count > 0)

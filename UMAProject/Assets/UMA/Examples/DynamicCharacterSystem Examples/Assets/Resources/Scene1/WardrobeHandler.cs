@@ -23,7 +23,7 @@ namespace UMA.CharacterSystem.Examples
 				if (Recipe == null)
 					return false;
 
-				if (UMAAssetIndexer.Instance.Preloads.ContainsKey(Recipe.name)) return true;
+				if ( UMAContextAdpterIndexer.AdapterResource.Preloads.ContainsKey(Recipe.name)) return true;
 	
 				return false;
 #else
@@ -83,7 +83,7 @@ namespace UMA.CharacterSystem.Examples
 			}
 			else
 			{
-				var op = UMAAssetIndexer.Instance.Preload(Recipe);
+				var op =  UMAContextAdpterIndexer.AdapterResource.Preload(Recipe);
 				op.Completed += Op_Completed;
 			} */
 #else

@@ -290,7 +290,7 @@ namespace UMA.Editors
 					return true;
 			}
 
-			AssetItem ai = UMAAssetIndexer.Instance.GetAssetItem<RaceData>(_raceData.raceName);
+			AssetItem ai =  UMAContextAdpterIndexer.AdapterResource.GetAssetItem<RaceData>(_raceData.raceName);
 			if (ai != null)
 			{
 				return true;

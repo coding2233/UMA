@@ -10,20 +10,20 @@ namespace UMA
 {
     public class UMAContextAdpterIndexer : UMAContextBase
     {
-        private AdapterResource _adapterResourceHelper;
-        private AdapterResource _adapterResource
+        private static AdapterResource _adapterResource;
+        public static AdapterResource AdapterResource
         {
             get
             {
-                if (_adapterResourceHelper == null)
+                if (_adapterResource == null)
                 {
 #if UNITY_EDITOR
-                    _adapterResourceHelper = new EditorAdapterResource();
+                    _adapterResource = new EditorAdapterResource();
 #else
                 _adapterResource = new AssetBundleAdapterResource();
 #endif
                 }
-                return _adapterResourceHelper;
+                return _adapterResource;
             }
         }
         //RaceRecipes _raceRecipes = new RaceRecipes();
@@ -36,12 +36,12 @@ namespace UMA
         #region Get asset
         public override List<DynamicUMADnaAsset> GetAllDNA()
         {
-            return _adapterResource.GetAllAssets<DynamicUMADnaAsset>();
+            return AdapterResource.GetAllAssets<DynamicUMADnaAsset>();
         }
 
         public override RaceData[] GetAllRaces()
         {
-            return _adapterResource.GetAllAssets<RaceData>().ToArray();
+            return AdapterResource.GetAllAssets<RaceData>().ToArray();
         }
 
         public override RaceData[] GetAllRacesBase()
@@ -51,14 +51,14 @@ namespace UMA
 
         public override RuntimeAnimatorController GetAnimatorController(string Name)
         {
-            return _adapterResource.GetAsset<RuntimeAnimatorController>(name);
+            return AdapterResource.GetAsset<RuntimeAnimatorController>(name);
         }
 
         public override UMATextRecipe GetRecipe(string filename, bool dynamicallyAdd=true)
         {
-            UMATextRecipe recipe = _adapterResource.GetAsset<UMAWardrobeRecipe>(filename);
+            UMATextRecipe recipe = AdapterResource.GetAsset<UMAWardrobeRecipe>(filename);
             if(recipe==null)
-                recipe= _adapterResource.GetAsset<UMAWardrobeCollection>(filename);
+                recipe= AdapterResource.GetAsset<UMAWardrobeCollection>(filename);
             return recipe;
 
         }
@@ -82,12 +82,12 @@ namespace UMA
 
         public override DynamicUMADnaAsset GetDNA(string Name)
         {
-            return _adapterResource.GetAsset<DynamicUMADnaAsset>(Name);
+            return AdapterResource.GetAsset<DynamicUMADnaAsset>(Name);
         }
 
         public override RaceData GetRace(string name)
         {
-            return _adapterResource.GetAsset<RaceData>(name);
+            return AdapterResource.GetAsset<RaceData>(name);
         }
 
         public override RaceData GetRace(int nameHash)
@@ -108,7 +108,7 @@ namespace UMA
             //Start with recipes that are directly marked for this race.
            HashSet<string> results = internalGetRecipeNamesForRaceSlot(race, slot);
 
-           RaceData rc = _adapterResource.GetAsset<RaceData>(race);
+           RaceData rc = AdapterResource.GetAsset<RaceData>(race);
             if (rc != null)
             {
                 foreach (string CompatRace in rc.GetCrossCompatibleRaces())
@@ -124,7 +124,7 @@ namespace UMA
         private HashSet<string> internalGetRecipeNamesForRaceSlot(string race, string slot)
         {
             RaceRecipes raceRecipes = new RaceRecipes();
-            var wardrobe = _adapterResource.GetAllAssets<UMAWardrobeRecipe>();
+            var wardrobe = AdapterResource.GetAllAssets<UMAWardrobeRecipe>();
             foreach (var uwr in wardrobe)
             {
                 foreach (string racename in uwr.compatibleRaces)
@@ -164,7 +164,7 @@ namespace UMA
         public override Dictionary<string, List<UMATextRecipe>> GetRecipes(string raceName)
         {
             RaceRecipes raceRecipes = new RaceRecipes();
-            var wardrobe = _adapterResource.GetAllAssets<UMAWardrobeRecipe>();
+            var wardrobe = AdapterResource.GetAllAssets<UMAWardrobeRecipe>();
             foreach (var uwr in wardrobe)
             {
                 foreach (string racename in uwr.compatibleRaces)
@@ -203,7 +203,7 @@ namespace UMA
             }
 
 
-            RaceData rc = _adapterResource.GetAsset<RaceData>(raceName);
+            RaceData rc = AdapterResource.GetAsset<RaceData>(raceName);
             if (rc != null)
             {
                 foreach (string CompatRace in rc.GetCrossCompatibleRaces())
@@ -243,7 +243,7 @@ namespace UMA
 
             foreach (string recipeName in recipes)
             {
-                UMAWardrobeRecipe uwr = _adapterResource.GetAsset<UMAWardrobeRecipe>(recipeName);
+                UMAWardrobeRecipe uwr = AdapterResource.GetAsset<UMAWardrobeRecipe>(recipeName);
                 if (uwr != null)
                 {
                     results.Add(uwr);
@@ -254,7 +254,7 @@ namespace UMA
 
         public override List<RuntimeAnimatorController> GetAllAnimatorControllers()
         {
-            return _adapterResource.GetAllAssets<RuntimeAnimatorController>();
+            return AdapterResource.GetAllAssets<RuntimeAnimatorController>();
         }
 
         #endregion
@@ -264,45 +264,56 @@ namespace UMA
 
         public override bool HasOverlay(string name)
         {
-            throw new System.NotImplementedException();
+            return AdapterResource.GetAsset<OverlayDataAsset>(name) != null;
         }
 
         public override bool HasOverlay(int nameHash)
         {
-            throw new System.NotImplementedException();
+            return AdapterResource.GetAsset<OverlayDataAsset>(nameHash) != null;
         }
 
         public override RaceData HasRace(string name)
         {
-            throw new System.NotImplementedException();
+            return AdapterResource.GetAsset<RaceData>(name);
         }
 
         public override RaceData HasRace(int nameHash)
         {
-            throw new System.NotImplementedException();
+            return AdapterResource.GetAsset<RaceData>(nameHash);
         }
 
         public override bool HasRecipe(string Name)
         {
-            throw new System.NotImplementedException();
+            bool found = AdapterResource.GetAsset<UMAWardrobeRecipe>(Name)!=null;
+            if (!found)
+                found = AdapterResource.GetAsset<UMAWardrobeCollection>(Name)!=null;
+
+            return found;
         }
 
         public override bool HasSlot(string name)
         {
-            throw new System.NotImplementedException();
+            return AdapterResource.GetAsset<SlotDataAsset>(name)!=null;
         }
 
         public override bool HasSlot(int nameHash)
         {
-            throw new System.NotImplementedException();
+            return AdapterResource.GetAsset<SlotDataAsset>(nameHash) != null;
+
         }
+
+        public override bool CheckRecipeAvailability(string recipeName)
+        {
+            return AdapterResource.GetAsset<UMAWardrobeRecipe>(recipeName) != null;
+        }
+
         #endregion
 
         #region Insance asset
 
         public override OverlayData InstantiateOverlay(string name)
         {
-            OverlayDataAsset source = _adapterResource.GetAsset<OverlayDataAsset>(name);
+            OverlayDataAsset source = AdapterResource.GetAsset<OverlayDataAsset>(name);
             if (source == null)
             {
                 throw new UMAResourceNotFoundException("UMAGlobalContext: Unable to find OverlayDataAsset: " + name);
@@ -312,7 +323,7 @@ namespace UMA
 
         public override OverlayData InstantiateOverlay(int nameHash)
         {
-            OverlayDataAsset source = _adapterResource.GetAsset<OverlayDataAsset>(nameHash);
+            OverlayDataAsset source = AdapterResource.GetAsset<OverlayDataAsset>(nameHash);
             if (source == null)
             {
                 throw new UMAResourceNotFoundException("UMAGlobalContext: Unable to find OverlayDataAsset: " + nameHash);
@@ -336,7 +347,7 @@ namespace UMA
 
         public override SlotData InstantiateSlot(string name)
         {
-            SlotDataAsset source = _adapterResource.GetAsset<SlotDataAsset>(name);
+            SlotDataAsset source = AdapterResource.GetAsset<SlotDataAsset>(name);
             if (source == null)
             {
                 throw new UMAResourceNotFoundException("UMAGlobalContext: Unable to find SlotDataAsset: " + name);
@@ -346,7 +357,7 @@ namespace UMA
 
         public override SlotData InstantiateSlot(int nameHash)
         {
-            SlotDataAsset source = UMAAssetIndexer.Instance.GetAsset<SlotDataAsset>(nameHash);
+            SlotDataAsset source =  UMAContextAdpterIndexer.AdapterResource.GetAsset<SlotDataAsset>(nameHash);
             if (source == null)
             {
                 throw new UMAResourceNotFoundException("UMAGlobalContext: Unable to find SlotDataAsset: " + nameHash);
@@ -394,10 +405,7 @@ namespace UMA
 
 
         #region other
-        public override bool CheckRecipeAvailability(string recipeName)
-        {
-            throw new System.NotImplementedException();
-        }
+   
 
         public override void EnsureRaceKey(string name)
         {

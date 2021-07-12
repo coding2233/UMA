@@ -15,10 +15,10 @@ namespace UMA.CharacterSystem
             if (EditorPrefs.GetBool("UMA_POSTPROCESS_ALL_ASSETS", false))
             {
                 // don't call if it's the indexer that's being updated!!!
-                if (UMAAssetIndexer.Instance != null)
-                {
-                    UMAAssetIndexer.Instance.OnPostprocessAllAssets(importedAssets, deletedAssets, movedAssets, movedFromAssetPaths);
-                }
+                //if ( UMAContextAdpterIndexer.AdapterResource != null)
+                //{
+                //     UMAContextAdpterIndexer.AdapterResource.OnPostprocessAllAssets(importedAssets, deletedAssets, movedAssets, movedFromAssetPaths);
+                //}
             }
         }
     }

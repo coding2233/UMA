@@ -18,9 +18,9 @@ namespace UMA
 
             if (EditorPrefs.GetString("UMA_VERSION", "0") != UmaAboutWindow.umaVersion)
             {                
-                UMAAssetIndexer UAI = UMAAssetIndexer.Instance;
-                if (UAI == null)
-                    return;
+                //UMAAssetIndexer UAI =  UMAContextAdpterIndexer.AdapterResource;
+                //if (UAI == null)
+                //    return;
 
                 int chosen = EditorUtility.DisplayDialogComplex("UMA " + UmaAboutWindow.umaVersion, "New UMA version imported. The global index should be rebuilt or restored (if you made a backup). (If you don't know what this means, choose 'Rebuild Index')", "Rebuild Index", "Restore from backup", "Do nothing");
 

@@ -112,8 +112,8 @@ namespace UMA.CharacterSystem.Editors
 									if (GUI.Button(warningRect, warningGUIContent, warningStyle))
 									{
 										var thisAnimator = FindMissingAnimator(thisAnimatorName);
-										if (thisAnimator != null)
-											UMAAssetIndexer.Instance.EvilAddAsset(thisAnimator.GetType(), thisAnimator);
+										//if (thisAnimator != null)
+										//	 UMAContextAdpterIndexer.AdapterResource.EvilAddAsset(thisAnimator.GetType(), thisAnimator);
 									}
 								}
 							EditorGUI.BeginDisabledGroup(true);
@@ -192,10 +192,10 @@ namespace UMA.CharacterSystem.Editors
 			if (Application.isPlaying)
 				return true;
 
-			if (UMAAssetIndexer.Instance.GetAssetDictionary(typeof(RuntimeAnimatorController)).ContainsKey(racName))
-			{
-				return true;
-			}
+			//if ( UMAContextAdpterIndexer.AdapterResource.GetAssetDictionary(typeof(RuntimeAnimatorController)).ContainsKey(racName))
+			//{
+			//	return true;
+			//}
 
 			RuntimeAnimatorController defaultController = null;
 			if (thisDCA != null)

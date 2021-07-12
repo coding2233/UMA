@@ -659,24 +659,24 @@ namespace UMA.Editors
 			}
 		}
 
-		[UnityEditor.MenuItem("Assets/Add Selected Assets to UMA Global Library")]
-		public static void AddSelectedToGlobalLibrary()
-		{
-			int added = 0;
-			UMAAssetIndexer UAI = UMAAssetIndexer.Instance;
+		//[UnityEditor.MenuItem("Assets/Add Selected Assets to UMA Global Library")]
+		//public static void AddSelectedToGlobalLibrary()
+		//{
+		//	int added = 0;
+		//	UMAAssetIndexer UAI =  UMAContextAdpterIndexer.AdapterResource;
 
-			foreach (Object o in Selection.objects)
-			{
-				System.Type type = o.GetType();
-				if (UAI.IsIndexedType(type))
-				{
-					if (UAI.EvilAddAsset(type, o))
-						added++;
-				}
-			}
-			UAI.ForceSave();
-			EditorUtility.DisplayDialog("Success", added + " item(s) added to Global Library", "OK");
-		}
+		//	foreach (Object o in Selection.objects)
+		//	{
+		//		System.Type type = o.GetType();
+		//		if (UAI.IsIndexedType(type))
+		//		{
+		//			if (UAI.EvilAddAsset(type, o))
+		//				added++;
+		//		}
+		//	}
+		//	UAI.ForceSave();
+		//	EditorUtility.DisplayDialog("Success", added + " item(s) added to Global Library", "OK");
+		//}
 	}
 
 	public class UmaPrefabSaverWindow : EditorWindow
