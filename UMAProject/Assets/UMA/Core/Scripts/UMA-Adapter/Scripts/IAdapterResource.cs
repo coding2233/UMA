@@ -31,7 +31,7 @@ namespace UMA
         {(typeof(UMAMaterial)), (typeof(UMAMaterial)) }
         };
 
-        public static Type[] AssetTypes { get; } = new Type[] {typeof(RaceData), typeof(SlotDataAsset), 
+        public static Type[] AssetTypes { get; } = new Type[] {typeof(RaceData), typeof(SlotDataAsset), typeof(UMARecipeBase),
             typeof(UMAMaterial), typeof(OverlayDataAsset), typeof(DynamicUMADnaAsset),
             typeof(RuntimeAnimatorController),typeof(AnimatorOverrideController),
             typeof(UMAWardrobeRecipe),typeof(UMAWardrobeCollection),typeof(UMATextRecipe),typeof(TextAsset),
@@ -123,9 +123,23 @@ namespace UMA
         public virtual AssetItem GetAssetItem<T>(string name) where T : UnityEngine.Object
         {
             var @object= GetAsset<T>(name);
+            if (@object == null)
+                return null;
+
             string path = "";
-            string guid = UnityEditor.AssetDatabase.GetAssetPath(@object);
-            path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+            foreach (var item in _allAssets)
+            {
+                if (@object == item.Value)
+                {
+                    path = item.Key;
+                    break;
+                }
+            }
+            if (string.IsNullOrEmpty(path))
+                return null;
+
+            //string guid = UnityEditor.AssetDatabase.GetAssetPath(@object);
+            //path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
             var ai = new AssetItem(typeof(T), name, path, @object);
             /*
             foreach (AssetItem ai in TypeDic.Values)
@@ -136,7 +150,7 @@ namespace UMA
                     return ai;
                 }
             }*/
-            return null;
+            return ai;
         }
 
         public virtual void ReleaseReference(UnityEngine.Object obj)

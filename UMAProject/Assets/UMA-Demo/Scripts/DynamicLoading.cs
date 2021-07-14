@@ -34,7 +34,7 @@ public class DynamicLoading : MonoBehaviour
         yield return uwr.SendWebRequest();
         if (uwr.result != UnityWebRequest.Result.Success)
         {
-            _log = "asset 下载失败";
+            _log = $"asset 下载失败[{uwr.result}]：{uwr.error}";
         }
         else
         {
@@ -60,14 +60,28 @@ public class DynamicLoading : MonoBehaviour
             yield return new WaitForEndOfFrame();
             var i = UMA. UMAContextAdpterIndexer.AdapterResource;
              _log = $"本地加载Assetbundle资源";
+
+            yield return new WaitForSeconds(2.0f);
+
+
             yield return new WaitForEndOfFrame();
-            _log = $"生成物体";
-            var t =GameObject.Instantiate(_target);
+            UMAContextBase.Instance = GameObject.FindObjectOfType<UMAContextAdpterIndexer>();
+            yield return new WaitForEndOfFrame();
+
+             var t = GameObject.Instantiate(_target);
             var dca = t.GetComponent<DynamicCharacterAvatar>();
-            dca.activeRace.data =  UMAContextAdpterIndexer.AdapterResource.GetAsset<RaceData>("HumanMale");
-            dca.BuildCharacter();
-            yield return new WaitForEndOfFrame();
+            dca.context = UMAContextBase.Instance;
+            dca.umaData = dca.gameObject.GetComponent<UMAData>();
             t.SetActive(true);
+            yield return new WaitForEndOfFrame();
+             _log = $"生成物体：{t.name}";
+             dca.BuildCharacter();
+
+            yield return new WaitForSeconds(3.0f);
+            var hm = UMAContextAdpterIndexer.AdapterResource.GetAsset<RaceData>("Werewolf");
+            dca.activeRace.data = hm;
+            dca.BuildCharacter();
+
         }
     }
 
@@ -82,21 +96,28 @@ public class DynamicLoading : MonoBehaviour
         GUI.Button(new Rect(Screen.width*0.5f,Screen.height*0.5f,400,300),_log);
     }
 #else
-    //private IEnumerator Start()
-    //{
-    //    var i = UMAContextAdpterIndexer.AdapterResource;
-    //    yield return new WaitForEndOfFrame();
-    //    UMAContextBase.Instance = GameObject.FindObjectOfType<UMAGlobalContext>();
-    //    yield return new WaitForEndOfFrame();
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(2.0f);
 
-    //    var hm = UMAContextAdpterIndexer.AdapterResource.GetAsset<RaceData>("HumanMale");
+        var i = UMAContextAdpterIndexer.AdapterResource;
+        yield return new WaitForEndOfFrame();
+        UMAContextBase.Instance = GameObject.FindObjectOfType<UMAContextAdpterIndexer>();
+        yield return new WaitForEndOfFrame();
 
-    //    var t = GameObject.Instantiate(_target);
-    //    var dca = t.GetComponent<DynamicCharacterAvatar>();
-    //    dca.activeRace.data = UMAContextAdpterIndexer.AdapterResource.GetAsset<RaceData>("HumanMale");
-    //    dca.BuildCharacter();
-    //    t.SetActive(true);
-    //}
+
+        var t = GameObject.Instantiate(_target);
+        var dca = t.GetComponent<DynamicCharacterAvatar>();
+        dca.context = UMAContextBase.Instance;
+        dca.umaData = dca.gameObject.GetComponent<UMAData>();
+        t.SetActive(true);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(3.0f);
+        var hm = UMAContextAdpterIndexer.AdapterResource.GetAsset<RaceData>("Werewolf");
+
+        dca.activeRace.data = hm;
+        dca.BuildCharacter();
+    }
 #endif
 
 }

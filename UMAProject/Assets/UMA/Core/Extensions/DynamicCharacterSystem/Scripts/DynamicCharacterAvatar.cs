@@ -460,6 +460,20 @@ namespace UMA.CharacterSystem
                 CreateEditorContext();
             }
 #endif
+
+            var galr = UMAContextAdpterIndexer.Instance.GetAllRaces();
+            Debug.LogWarning($" [Start] GetAllRaces is null: {galr == null}");
+
+            Debug.LogWarning($" [Start] GetAllRaces length: {galr.Length}");
+
+            foreach (var item in galr)
+            {
+                Debug.LogWarning($" [Start] GetAllRaces item: {item.name}");
+
+                Debug.LogWarning($" [Start] GetAllRaces item baseRaceRecipe is null: {item.baseRaceRecipe==null}");
+            }
+
+
             lastHide = !hide;
 
             if (umaGenerator == null)
@@ -1032,6 +1046,17 @@ namespace UMA.CharacterSystem
                     Debug.LogWarning("No activeRace set. Aborting build");
                 return false;
             }
+
+            Debug.LogWarning($"activeRace.name: {activeRace.name}");
+
+            Debug.LogWarning($"activeRace.data is null: {activeRace.data==null}");
+
+            Debug.LogWarning($"activeRace.racedata.raceName: {activeRace.racedata.raceName}");
+
+            Debug.LogWarning($"activeRace.racedata.baseRaceRecipe is null: {activeRace.racedata.baseRaceRecipe==null}");
+
+
+
             //ImportSettingsCO might have changed the activeRace.name so we may still need to change the actual racedata if activeRace.racedata.raceName is different
             if (activeRace.data != null && activeRace.name == activeRace.racedata.raceName)
             {
@@ -3123,6 +3148,17 @@ namespace UMA.CharacterSystem
 #if SUPER_LOGGING
 			Debug.Log("Building DynamicCharacterAvatar: " + gameObject.name);
 #endif
+
+            var galr = UMAContextAdpterIndexer.Instance.GetAllRaces();
+            Debug.LogWarning($" GetAllRaces is null: {galr == null}");
+
+            Debug.LogWarning($" GetAllRaces length: {galr.Length}");
+
+            foreach (var item in galr)
+            {
+                Debug.LogWarning($" GetAllRaces item: {item.name}");
+            }
+
             overrideDNA.Clear();
 
             if (activeRace.racedata == null)
